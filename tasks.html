@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>ゆうやの全タスクマップ｜2026-08-30</title>
+<style>
+:root{
+  --red:#E5484D;   --red-bg:#FDECEC;   --red-dk:#B32B30;
+  --org:#F76B15;   --org-bg:#FEF0E4;   --org-dk:#C4520A;
+  --yel:#FFB224;   --yel-bg:#FFF6E3;   --yel-dk:#B87A00;
+  --grn:#30A46C;   --grn-bg:#E7F6EE;   --grn-dk:#1F7A4D;
+  --blu:#0091FF;   --blu-bg:#E6F3FF;   --blu-dk:#0068BD;
+  --ink:#1A1D21;   --ink2:#4A5158;   --ink3:#6A737C;
+  --line:#E3E7EB;  --bg:#F7F9FB;      --card:#FFFFFF;
+  --shadow:0 1px 2px rgba(20,30,40,.05), 0 6px 18px rgba(20,30,40,.06);
+  --shadow-h:0 4px 8px rgba(20,30,40,.07), 0 14px 32px rgba(20,30,40,.11);
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  background:var(--bg); color:var(--ink);
+  line-height:1.75; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1160px; margin:0 auto; padding:0 20px}
+section{margin:0 auto}
+
+/* ---------- 凡例（上部固定） ---------- */
+.legendbar{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,.94);
+  -webkit-backdrop-filter:saturate(180%) blur(10px);
+  backdrop-filter:saturate(180%) blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.legendbar .inner{
+  max-width:1160px; margin:0 auto; padding:10px 20px;
+  display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center;
+}
+.legendbar .lb-title{font-weight:800; font-size:13px; color:var(--ink3); letter-spacing:.04em; margin-right:2px}
+.lgd{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:var(--ink2); white-space:nowrap}
+.lgd .dot{width:12px; height:12px; border-radius:50%; flex:0 0 auto}
+.d-red{background:var(--red)} .d-org{background:var(--org)} .d-yel{background:var(--yel)}
+.d-grn{background:var(--grn)} .d-blu{background:var(--blu)}
+
+/* ---------- ヒーロー ---------- */
+.hero{
+  background:linear-gradient(180deg,#FFFFFF 0%,#F2F6FA 100%);
+  border-bottom:1px solid var(--line);
+  padding:44px 0 40px;
+}
+.eyebrow{
+  display:inline-block; font-size:13px; font-weight:800; letter-spacing:.12em;
+  color:var(--ink3); background:#fff; border:1px solid var(--line);
+  border-radius:999px; padding:5px 14px; margin-bottom:16px;
+}
+h1{
+  font-size:clamp(30px,6.2vw,52px); line-height:1.25; font-weight:900;
+  letter-spacing:-.02em; margin-bottom:10px;
+}
+.lede{font-size:clamp(15px,3.4vw,18px); color:var(--ink2); font-weight:600; max-width:44em}
+
+/* 統計カード */
+.stats{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px; margin-top:26px;
+}
+.stat{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:16px 16px 14px; box-shadow:var(--shadow); text-align:center;
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.stat:hover{transform:translateY(-3px); box-shadow:var(--shadow-h)}
+.stat .num{font-size:clamp(34px,8vw,46px); font-weight:900; line-height:1.05; letter-spacing:-.03em}
+.stat .lbl{font-size:13px; font-weight:800; color:var(--ink2); margin-top:6px}
+.stat .sub{font-size:11px; font-weight:700; color:var(--ink3); margin-top:2px}
+.stat.total{background:var(--ink); border-color:var(--ink)}
+.stat.total .num{color:#fff} .stat.total .lbl{color:#C9D2DA} .stat.total .sub{color:#8C99A5}
+.n-red{color:var(--red)} .n-org{color:var(--org)} .n-yel{color:var(--yel-dk)}
+.n-grn{color:var(--grn)} .n-blu{color:var(--blu)}
+
+/* 構成比バー */
+.ratio{margin-top:22px}
+.ratio .ratio-title{font-size:13px; font-weight:800; color:var(--ink3); letter-spacing:.06em; margin-bottom:8px}
+.bar{
+  display:flex; width:100%; height:34px; border-radius:12px; overflow:hidden;
+  border:1px solid var(--line); background:#fff; box-shadow:var(--shadow);
+}
+.bar span{
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:900; color:#fff; overflow:hidden; white-space:nowrap;
+}
+.b-red{background:var(--red)} .b-org{background:var(--org)}
+.b-yel{background:var(--yel); color:#6B4400 !important}
+.b-grn{background:var(--grn)} .b-blu{background:var(--blu)}
+
+/* ---------- 見出し ---------- */
+.sec{padding:46px 0 8px}
+.sec-head{margin-bottom:20px}
+.sec-kicker{font-size:12px; font-weight:900; letter-spacing:.14em; color:var(--ink3)}
+h2{font-size:clamp(22px,4.6vw,32px); font-weight:900; letter-spacing:-.02em; line-height:1.35; margin-top:4px}
+.sec-note{font-size:14px; color:var(--ink2); font-weight:600; margin-top:6px}
+
+/* ---------- あなた待ちリスト ---------- */
+.alert{
+  background:linear-gradient(180deg,#FFF5F5 0%,#FFECEC 100%);
+  border:2px solid #F5B5B7; border-radius:24px;
+  padding:26px 22px 24px; margin:12px 0 8px;
+  box-shadow:0 10px 30px rgba(229,72,77,.10);
+}
+.alert-top{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:6px}
+.alert-chip{
+  background:var(--red); color:#fff; font-weight:900; font-size:13px;
+  border-radius:999px; padding:5px 14px; letter-spacing:.03em;
+}
+.alert h2{color:var(--red-dk)}
+.alert-lede{font-size:15px; font-weight:700; color:#7E2C2E; margin:6px 0 18px}
+.todo{list-style:none; display:grid; gap:10px}
+.todo li{
+  display:flex; gap:14px; align-items:flex-start;
+  background:#fff; border:1px solid #F3C6C7; border-left:6px solid var(--red);
+  border-radius:14px; padding:14px 16px; box-shadow:var(--shadow);
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.todo li:hover{transform:translateY(-2px); box-shadow:var(--shadow-h)}
+.todo .no{
+  flex:0 0 34px; width:34px; height:34px; border-radius:50%;
+  background:var(--red); color:#fff; font-weight:900; font-size:16px;
+  display:flex; align-items:center; justify-content:center; margin-top:2px;
+}
+.todo .body{flex:1 1 auto; min-width:0}
+.todo .act{font-size:17px; font-weight:900; line-height:1.5; letter-spacing:-.01em}
+.todo .meta{display:flex; flex-wrap:wrap; gap:6px 8px; margin-top:8px}
+.tag{
+  font-size:12px; font-weight:800; border-radius:999px; padding:3px 10px;
+  background:#F1F4F7; color:var(--ink2); border:1px solid var(--line); white-space:nowrap;
+}
+.tag.time{background:var(--red-bg); color:var(--red-dk); border-color:#F3C6C7}
+.alert-foot{font-size:12px; color:#8A5B5C; font-weight:700; margin-top:14px}
+
+/* ---------- 事業マップ ---------- */
+.mapbox{
+  background:var(--card); border:1px solid var(--line); border-radius:24px;
+  padding:22px; box-shadow:var(--shadow); overflow:hidden;
+}
+.mapbox svg{display:block; width:100%; height:auto}
+.map-mobile{display:none; gap:10px; grid-template-columns:1fr}
+.mnode{
+  display:flex; align-items:center; gap:12px;
+  background:#fff; border:1px solid var(--line); border-radius:16px;
+  padding:12px 14px; box-shadow:var(--shadow);
+}
+.mnode .mi{
+  flex:0 0 42px; width:42px; height:42px; border-radius:12px;
+  background:#EEF3F8; color:var(--ink2); font-weight:900; font-size:17px;
+  display:flex; align-items:center; justify-content:center;
+}
+.mnode .mt{flex:1 1 auto; min-width:0; font-weight:900; font-size:15px; line-height:1.4}
+.mnode .mc{display:flex; gap:5px; flex-wrap:wrap; margin-top:4px}
+.mini{font-size:11px; font-weight:800; border-radius:999px; padding:2px 8px; background:#F1F4F7; color:var(--ink2)}
+.mini.r{background:var(--red-bg); color:var(--red-dk)}
+
+/* ---------- 事業セクション ---------- */
+.biz{padding-top:40px}
+.biz-head{
+  display:flex; flex-wrap:wrap; align-items:flex-start; gap:14px;
+  background:var(--card); border:1px solid var(--line); border-radius:20px;
+  padding:18px 20px; box-shadow:var(--shadow); margin-bottom:18px;
+}
+.biz-no{
+  flex:0 0 52px; width:52px; height:52px; border-radius:16px;
+  background:var(--ink); color:#fff; font-size:22px; font-weight:900;
+  display:flex; align-items:center; justify-content:center;
+}
+.biz-txt{flex:1 1 260px; min-width:0}
+.biz-txt h3{font-size:clamp(19px,4.2vw,25px); font-weight:900; letter-spacing:-.02em; line-height:1.35}
+.biz-txt p{font-size:14px; color:var(--ink2); font-weight:600; margin-top:3px}
+.counts{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:10px}
+.cnt{
+  font-size:12px; font-weight:900; border-radius:999px; padding:4px 11px;
+  border:1px solid transparent; white-space:nowrap;
+}
+.c-all{background:#EEF2F6; color:var(--ink2); border-color:var(--line)}
+.c-red{background:var(--red-bg); color:var(--red-dk)}
+.c-org{background:var(--org-bg); color:var(--org-dk)}
+.c-yel{background:var(--yel-bg); color:#8A5C00}
+.c-grn{background:var(--grn-bg); color:var(--grn-dk)}
+.c-blu{background:var(--blu-bg); color:var(--blu-dk)}
+
+/* ---------- タスクカード ---------- */
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px}
+.card{
+  background:var(--card); border:1px solid var(--line); border-left:6px solid var(--line);
+  border-radius:var(--radius); padding:16px 18px 15px; box-shadow:var(--shadow);
+  display:flex; flex-direction:column;
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.card:hover{transform:translateY(-4px); box-shadow:var(--shadow-h)}
+.card h4{font-size:17px; font-weight:900; line-height:1.45; letter-spacing:-.01em; margin:8px 0 0}
+.card .slug{font-size:11px; font-weight:700; color:var(--ink3); margin-top:3px; word-break:break-all}
+.card .desc{font-size:14px; color:var(--ink2); font-weight:600; margin-top:8px; flex:1 1 auto}
+.badge{
+  align-self:flex-start; font-size:12px; font-weight:900;
+  border-radius:999px; padding:4px 12px; white-space:nowrap;
+}
+.g-red{border-left-color:var(--red)} .g-org{border-left-color:var(--org)}
+.g-yel{border-left-color:var(--yel)} .g-grn{border-left-color:var(--grn)}
+.g-blu{border-left-color:var(--blu)}
+.p-red{background:var(--red-bg); color:var(--red-dk)}
+.p-org{background:var(--org-bg); color:var(--org-dk)}
+.p-yel{background:var(--yel-bg); color:#8A5C00}
+.p-grn{background:var(--grn-bg); color:var(--grn-dk)}
+.p-blu{background:var(--blu-bg); color:var(--blu-dk)}
+.next{
+  margin-top:12px; padding:9px 12px; border-radius:12px;
+  background:#F4F7FA; border:1px solid var(--line);
+  font-size:13.5px; font-weight:700; color:var(--ink); line-height:1.6;
+}
+.next b{display:block; font-size:11px; font-weight:900; color:var(--ink3); letter-spacing:.08em; margin-bottom:2px}
+.card.g-red .next{background:var(--red-bg); border-color:#F3C6C7}
+.card.g-red .next b{color:var(--red-dk)}
+.card.g-org .next{background:var(--org-bg); border-color:#F7D5B4}
+.card.g-org .next b{color:var(--org-dk)}
+
+/* ---------- フッター ---------- */
+footer{
+  margin-top:56px; border-top:1px solid var(--line); background:#fff;
+  padding:26px 0 40px; text-align:center;
+}
+footer p{font-size:13px; color:var(--ink3); font-weight:700}
+footer p+p{margin-top:4px}
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width:760px){
+  .mapbox .map-svg{display:none}
+  .map-mobile{display:grid}
+  .mapbox{padding:14px}
+  .wrap{padding:0 14px}
+  .legendbar .inner{padding:8px 14px; gap:6px 10px}
+  .lgd{font-size:12px}
+  .hero{padding:30px 0 30px}
+  .grid{grid-template-columns:1fr; gap:12px}
+  .todo li{padding:12px 13px; gap:11px}
+  .todo .act{font-size:16px}
+  .alert{padding:20px 15px; border-radius:20px}
+  .biz-head{padding:15px}
+  .biz-no{flex:0 0 44px; width:44px; height:44px; font-size:19px}
+  .bar span{font-size:10px}
+}
+@media print{
+  *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+  body{background:#fff}
+  .legendbar{position:static}
+  .card,.stat,.todo li,.biz-head,.mapbox{box-shadow:none; break-inside:avoid}
+  .biz{break-before:page}
+  .alert{background:#fff}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 凡例（固定） ===== -->
+<div class="legendbar">
+  <div class="inner">
+    <span class="lb-title">色の意味</span>
+    <span class="lgd"><span class="dot d-red"></span>あなた待ち</span>
+    <span class="lgd"><span class="dot d-org"></span>要対応・リスク</span>
+    <span class="lgd"><span class="dot d-yel"></span>未公開・作業残</span>
+    <span class="lgd"><span class="dot d-grn"></span>稼働中</span>
+    <span class="lgd"><span class="dot d-blu"></span>完了・公開済</span>
+  </div>
+</div>
+
+<!-- ===== (1) ヒーロー ===== -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">2026-08-30 時点のスナップショット</span>
+    <h1>ゆうやの<br>全タスクマップ</h1>
+    <p class="lede">いま動いている仕事を、7つの事業に分けて1枚にまとめました。<br>いちばん大事なのは「赤 = あなたが動かないと止まっているもの」です。</p>
+
+    <div class="stats">
+      <div class="stat total"><div class="num">52</div><div class="lbl">タスク総数</div><div class="sub">7事業ぜんぶ</div></div>
+      <div class="stat"><div class="num n-red">6</div><div class="lbl">あなた待ち</div><div class="sub">全体の12%</div></div>
+      <div class="stat"><div class="num n-org">2</div><div class="lbl">要対応・リスク</div><div class="sub">全体の4%</div></div>
+      <div class="stat"><div class="num n-yel">14</div><div class="lbl">未公開・作業残</div><div class="sub">全体の27%</div></div>
+      <div class="stat"><div class="num n-grn">10</div><div class="lbl">稼働中</div><div class="sub">全体の19%</div></div>
+      <div class="stat"><div class="num n-blu">20</div><div class="lbl">完了・公開済</div><div class="sub">全体の38%</div></div>
+    </div>
+
+    <div class="ratio">
+      <p class="ratio-title">ステータス構成比（52件の内訳）</p>
+      <div class="bar" role="img" aria-label="あなた待ち6件、要対応2件、未公開・作業残14件、稼働中10件、完了・公開済20件">
+        <span class="b-red" style="width:11.54%">6</span>
+        <span class="b-org" style="width:3.85%">2</span>
+        <span class="b-yel" style="width:26.92%">14</span>
+        <span class="b-grn" style="width:19.23%">10</span>
+        <span class="b-blu" style="width:38.46%">20</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== (2) あなた待ちアクションリスト ===== -->
+<section class="sec wrap" id="action">
+  <div class="alert">
+    <div class="alert-top">
+      <span class="alert-chip">最優先</span>
+      <span class="sec-kicker">YOUR ACTION LIST</span>
+    </div>
+    <h2>🔴 あなたが動けば進むもの　6件</h2>
+    <p class="alert-lede">どれも「あなた本人の1アクション」で止まっています。ここが片づくと、後ろの作業がまとめて動き出します。</p>
+
+    <ol class="todo">
+      <li>
+        <div class="no">1</div>
+        <div class="body">
+          <div class="act">マネーフォワードのブロックを外す（Chrome拡張のサイト許可を1クリック）</div>
+          <div class="meta"><span class="tag time">目安 約1分</span><span class="tag">⑦ 本部・共通基盤</span><span class="tag">いちばん軽い</span></div>
+        </div>
+      </li>
+      <li>
+        <div class="no">2</div>
+        <div class="body">
+          <div class="act">ボイスメモ文字起こしのため、macOS のマイク許可（TCC）を解除する</div>
+          <div class="meta"><span class="tag time">目安 約3分</span><span class="tag">⑦ 本部・共通基盤</span></div>
+        </div>
+      </li>
+      <li>
+        <div class="no">3</div>
+        <div class="body">
+          <div class="act">アパレル部門向け講義スライドを公開する（setup-publish.sh を1行実行＋オープンチャットURLを共有）</div>
+          <div class="meta"><span class="tag time">目安 約5分</span><span class="tag">① アクセサリーコンサル</span><span class="tag">スライドは完成済み</span></div>
+        </div>
+      </li>
+      <li>
+        <div class="no">4</div>
+        <div class="body">
+          <div class="act">アンケート自動送信のため、LINE Developers の設定4点を入れる（手順書あり）</div>
+          <div class="meta"><span class="tag time">目安 約15分</span><span class="tag">① アクセサリーコンサル</span><span class="tag">310テストPASS済み</span></div>
+        </div>
+      </li>
+      <li>
+        <div class="no">5</div>
+        <div class="body">
+          <div class="act">DRM特典14本＋ハブを載せる UTAGE ページを作る（手順書 docs/UTAGE-SETUP.md）</div>
+          <div class="meta"><span class="tag time">目安 約30分</span><span class="tag">③ SNSコンサル講師</span><span class="tag">15ファイル納品済み</span></div>
+        </div>
+      </li>
+      <li>
+        <div class="no">6</div>
+        <div class="body">
+          <div class="act">法人化＋2025年分の期限後申告について、要判断4点に回答する</div>
+          <div class="meta"><span class="tag time">目安 じっくり</span><span class="tag">⑦ 本部・共通基盤</span><span class="tag">成果物19本は完成済み</span></div>
+        </div>
+      </li>
+    </ol>
+    <p class="alert-foot">※ 所要目安は「作業の内容から見たおおよその見積り」です。実測値ではありません。</p>
+  </div>
+</section>
+
+<!-- ===== (3) 事業マップ概観 ===== -->
+<section class="sec wrap">
+  <div class="sec-head">
+    <div class="sec-kicker">OVERVIEW</div>
+    <h2>いま抱えている7つの事業</h2>
+    <p class="sec-note">各カードのグレーのバッジはタスク数、赤いバッジは「あなた待ち」の数です。</p>
+  </div>
+
+  <div class="mapbox">
+    <svg class="map-svg" viewBox="0 0 900 570" role="img" aria-label="7つの事業の全体図。中心はゆうや、全52タスクのうちあなた待ちは6件。①アクセサリーコンサル7件うちあなた待ち2、②アクセサリー物販7件うち稼働中3、③SNSコンサル講師14件うちあなた待ち1、④自分のSNS発信9件うち稼働中2、⑤BチームSNS運用1件うちぜんぶ完了、⑥セールスBチーム2件うち作業残1、⑦本部・共通基盤12件うちあなた待ち3。">
+      <defs>
+        <linearGradient id="ctr" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2B3138"/><stop offset="100%" stop-color="#12161A"/>
+        </linearGradient>
+      </defs>
+      <g stroke="#CFD8E0" stroke-width="2.5" stroke-linecap="round">
+        <line x1="450" y1="300" x2="450" y2="90"/>
+        <line x1="450" y1="300" x2="685" y2="169"/>
+        <line x1="450" y1="300" x2="742" y2="347"/>
+        <line x1="450" y1="300" x2="580" y2="489"/>
+        <line x1="450" y1="300" x2="320" y2="489"/>
+        <line x1="450" y1="300" x2="158" y2="347"/>
+        <line x1="450" y1="300" x2="216" y2="169"/>
+      </g>
+      <circle cx="450" cy="300" r="86" fill="url(#ctr)"/>
+      <circle cx="450" cy="300" r="97" fill="none" stroke="#2B3138" stroke-width="1.5" opacity=".22"/>
+      <text x="450" y="287" text-anchor="middle" fill="#FFFFFF" font-size="27" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">ゆうや</text>
+      <text x="450" y="317" text-anchor="middle" fill="#9AA6B2" font-size="14" font-weight="800" font-family="-apple-system,'Hiragino Sans',sans-serif">全52タスク</text>
+      <text x="450" y="337" text-anchor="middle" fill="#E5484D" font-size="14" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">うち あなた待ち6</text>
+      <g>
+        <rect x="342" y="45" width="216" height="90" rx="20" fill="#FFFFFF" stroke="#E3E7EB" stroke-width="2"/>
+        <rect x="342" y="45" width="8" height="90" rx="4" fill="#E5484D"/>
+        <circle cx="366" cy="74" r="12" fill="#EEF2F6"/>
+        <text x="366" y="79" text-anchor="middle" fill="#6A737C" font-size="12" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">①</text>
+        <text x="384" y="80" fill="#1A1D21" font-size="16" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">アクセサリーコンサル</text>
+        <rect x="366" y="96" width="54" height="22" rx="11" fill="#EEF2F6"/>
+        <text x="393" y="112" text-anchor="middle" fill="#4A5158" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">7件</text>
+        <rect x="426" y="96" width="100" height="22" rx="11" fill="#FDECEC"/>
+        <text x="476" y="112" text-anchor="middle" fill="#B32B30" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">あなた待ち2</text>
+      </g>
+      <g>
+        <rect x="577" y="124" width="216" height="90" rx="20" fill="#FFFFFF" stroke="#E3E7EB" stroke-width="2"/>
+        <rect x="577" y="124" width="8" height="90" rx="4" fill="#30A46C"/>
+        <circle cx="601" cy="153" r="12" fill="#EEF2F6"/>
+        <text x="601" y="158" text-anchor="middle" fill="#6A737C" font-size="12" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">②</text>
+        <text x="619" y="159" fill="#1A1D21" font-size="16" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">アクセサリー物販</text>
+        <rect x="601" y="175" width="54" height="22" rx="11" fill="#EEF2F6"/>
+        <text x="628" y="191" text-anchor="middle" fill="#4A5158" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">7件</text>
+        <rect x="661" y="175" width="100" height="22" rx="11" fill="#E7F6EE"/>
+        <text x="711" y="191" text-anchor="middle" fill="#1F7A4D" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">稼働中3</text>
+      </g>
+      <g>
+        <rect x="634" y="302" width="216" height="90" rx="20" fill="#FFFFFF" stroke="#E3E7EB" stroke-width="2"/>
+        <rect x="634" y="302" width="8" height="90" rx="4" fill="#E5484D"/>
+        <circle cx="658" cy="331" r="12" fill="#EEF2F6"/>
+        <text x="658" y="336" text-anchor="middle" fill="#6A737C" font-size="12" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">③</text>
+        <text x="676" y="337" fill="#1A1D21" font-size="16" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">SNSコンサル講師</text>
+        <rect x="658" y="353" width="54" height="22" rx="11" fill="#EEF2F6"/>
+        <text x="685" y="369" text-anchor="middle" fill="#4A5158" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">14件</text>
+        <rect x="718" y="353" width="100" height="22" rx="11" fill="#FDECEC"/>
+        <text x="768" y="369" text-anchor="middle" fill="#B32B30" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">あなた待ち1</text>
+      </g>
+      <g>
+        <rect x="472" y="444" width="216" height="90" rx="20" fill="#FFFFFF" stroke="#E3E7EB" stroke-width="2"/>
+        <rect x="472" y="444" width="8" height="90" rx="4" fill="#30A46C"/>
+        <circle cx="496" cy="473" r="12" fill="#EEF2F6"/>
+        <text x="496" y="478" text-anchor="middle" fill="#6A737C" font-size="12" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">④</text>
+        <text x="514" y="479" fill="#1A1D21" font-size="16" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">自分のSNS発信</text>
+        <rect x="496" y="495" width="54" height="22" rx="11" fill="#EEF2F6"/>
+        <text x="523" y="511" text-anchor="middle" fill="#4A5158" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">9件</text>
+        <rect x="556" y="495" width="100" height="22" rx="11" fill="#E7F6EE"/>
+        <text x="606" y="511" text-anchor="middle" fill="#1F7A4D" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">稼働中2</text>
+      </g>
+      <g>
+        <rect x="212" y="444" width="216" height="90" rx="20" fill="#FFFFFF" stroke="#E3E7EB" stroke-width="2"/>
+        <rect x="212" y="444" width="8" height="90" rx="4" fill="#0091FF"/>
+        <circle cx="236" cy="473" r="12" fill="#EEF2F6"/>
+        <text x="236" y="478" text-anchor="middle" fill="#6A737C" font-size="12" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">⑤</text>
+        <text x="254" y="479" fill="#1A1D21" font-size="16" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">BチームSNS運用</text>
+        <rect x="236" y="495" width="54" height="22" rx="11" fill="#EEF2F6"/>
+        <text x="263" y="511" text-anchor="middle" fill="#4A5158" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">1件</text>
+        <rect x="296" y="495" width="100" height="22" rx="11" fill="#E6F3FF"/>
+        <text x="346" y="511" text-anchor="middle" fill="#0068BD" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">ぜんぶ完了</text>
+      </g>
+      <g>
+        <rect x="50" y="302" width="216" height="90" rx="20" fill="#FFFFFF" stroke="#E3E7EB" stroke-width="2"/>
+        <rect x="50" y="302" width="8" height="90" rx="4" fill="#FFB224"/>
+        <circle cx="74" cy="331" r="12" fill="#EEF2F6"/>
+        <text x="74" y="336" text-anchor="middle" fill="#6A737C" font-size="12" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">⑥</text>
+        <text x="92" y="337" fill="#1A1D21" font-size="16" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">セールスBチーム</text>
+        <rect x="74" y="353" width="54" height="22" rx="11" fill="#EEF2F6"/>
+        <text x="101" y="369" text-anchor="middle" fill="#4A5158" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">2件</text>
+        <rect x="134" y="353" width="100" height="22" rx="11" fill="#FFF6E3"/>
+        <text x="184" y="369" text-anchor="middle" fill="#8A5C00" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">作業残1</text>
+      </g>
+      <g>
+        <rect x="108" y="124" width="216" height="90" rx="20" fill="#FFFFFF" stroke="#E3E7EB" stroke-width="2"/>
+        <rect x="108" y="124" width="8" height="90" rx="4" fill="#E5484D"/>
+        <circle cx="132" cy="153" r="12" fill="#EEF2F6"/>
+        <text x="132" y="158" text-anchor="middle" fill="#6A737C" font-size="12" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">⑦</text>
+        <text x="150" y="159" fill="#1A1D21" font-size="16" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">本部・共通基盤</text>
+        <rect x="132" y="175" width="54" height="22" rx="11" fill="#EEF2F6"/>
+        <text x="159" y="191" text-anchor="middle" fill="#4A5158" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">12件</text>
+        <rect x="192" y="175" width="100" height="22" rx="11" fill="#FDECEC"/>
+        <text x="242" y="191" text-anchor="middle" fill="#B32B30" font-size="12.5" font-weight="900" font-family="-apple-system,'Hiragino Sans',sans-serif">あなた待ち3</text>
+      </g>
+    </svg>
+
+    <div class="map-mobile">
+      <div class="mnode"><div class="mi">中心</div><div class="mt">ゆうや<div class="mc"><span class="mini">全52タスク</span><span class="mini r">あなた待ち6</span></div></div></div>
+      <div class="mnode"><div class="mi">①</div><div class="mt">アクセサリーコンサル<div class="mc"><span class="mini">7件</span><span class="mini r">あなた待ち2</span></div></div></div>
+      <div class="mnode"><div class="mi">②</div><div class="mt">アクセサリー物販<div class="mc"><span class="mini">7件</span><span class="mini">稼働中3</span></div></div></div>
+      <div class="mnode"><div class="mi">③</div><div class="mt">SNSコンサル講師<div class="mc"><span class="mini">14件</span><span class="mini r">あなた待ち1</span></div></div></div>
+      <div class="mnode"><div class="mi">④</div><div class="mt">自分のSNS発信<div class="mc"><span class="mini">9件</span><span class="mini">稼働中2</span></div></div></div>
+      <div class="mnode"><div class="mi">⑤</div><div class="mt">BチームSNS運用<div class="mc"><span class="mini">1件</span><span class="mini">ぜんぶ完了</span></div></div></div>
+      <div class="mnode"><div class="mi">⑥</div><div class="mt">セールスBチーム<div class="mc"><span class="mini">2件</span><span class="mini">作業残1</span></div></div></div>
+      <div class="mnode"><div class="mi">⑦</div><div class="mt">本部・共通基盤<div class="mc"><span class="mini">12件</span><span class="mini r">あなた待ち3</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ① -->
+<section class="sec biz wrap">
+  <div class="biz-head">
+    <div class="biz-no">①</div>
+    <div class="biz-txt">
+      <h3>アクセサリーコンサル</h3>
+      <p>アクセ物販を教える事業。</p>
+      <div class="counts">
+        <span class="cnt c-all">全7件</span>
+        <span class="cnt c-red">あなた待ち 2</span>
+        <span class="cnt c-org">要対応 1</span>
+        <span class="cnt c-yel">未公開・作業残 2</span>
+        <span class="cnt c-grn">稼働中 1</span>
+        <span class="cnt c-blu">完了・公開済 1</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <article class="card g-red">
+      <span class="badge p-red">🔴 あなた待ち</span>
+      <h4>アパレル部門向け 講義スライド15枚</h4>
+      <p class="desc">「アクセ物販という選択肢」を伝える15枚。中身は完成しています。</p>
+      <div class="next"><b>次の一手</b>setup-publish.sh を1行実行し、オープンチャットのURLを共有する</div>
+    </article>
+    <article class="card g-red">
+      <span class="badge p-red">🔴 あなた待ち</span>
+      <h4>アンケート回答 → 公式LINE 自動送信</h4>
+      <p class="desc">回答が届いたら公式LINEへ定型文を自動で送るしくみ。実装と310件のテストは通っています。</p>
+      <div class="next"><b>次の一手</b>LINE Developers の設定4点を入れる（手順書あり）</div>
+    </article>
+    <article class="card g-org">
+      <span class="badge p-org">🟠 要対応</span>
+      <h4>月利100万円達成記念プレゼントLP</h4>
+      <p class="desc">公開済みですが、特典03に誤字があることが分かっています。</p>
+      <div class="next"><b>次の一手</b>誤字を直して、もう一度 push する</div>
+    </article>
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 未公開</span>
+      <h4>セミナー特典6本＋ハブ</h4>
+      <p class="desc">真贋・リペアなどをまとめた特典6本とハブページ。制作は完了しています。</p>
+      <div class="next"><b>次の一手</b>中身を確認して、公開してOKか決める</div>
+    </article>
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 未公開</span>
+      <h4>週次グルコン資料「結果が出る人の3つの共通点」20枚</h4>
+      <p class="desc">マインド編の20枚。完成済みで、毎週のテンプレとしても使い回せます。</p>
+      <div class="next"><b>次の一手</b>週次テンプレとして流用しつつ、公開の可否を決める</div>
+    </article>
+    <article class="card g-grn">
+      <span class="badge p-grn">🟢 稼働中</span>
+      <h4>体験会アンケートシステム</h4>
+      <p class="desc">回答をGASがA〜Eで自動採点。いまも動いています。</p>
+      <div class="next"><b>次の一手</b>そのまま運用（変更するときは手順の順番に注意）</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 完了</span>
+      <h4>「進め方の基礎」スライド25枚</h4>
+      <p class="desc">コンサルの進め方をまとめた25枚。完成済みです。</p>
+      <div class="next"><b>次の一手</b>必要なときに使うだけ</div>
+    </article>
+  </div>
+</section>
+
+<!-- ② -->
+<section class="sec biz wrap">
+  <div class="biz-head">
+    <div class="biz-no">②</div>
+    <div class="biz-txt">
+      <h3>アクセサリー物販</h3>
+      <p>自分で仕入れて売る物販・せどり。</p>
+      <div class="counts">
+        <span class="cnt c-all">全7件</span>
+        <span class="cnt c-yel">未公開・作業残 2</span>
+        <span class="cnt c-grn">稼働中 3</span>
+        <span class="cnt c-blu">完了・公開済 2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 未稼働</span>
+      <h4>ヤフオク仕入れ候補 毎朝08:00 LINE配信</h4>
+      <p class="desc">中身はできていますが、launchd に登録していないため動いていません。</p>
+      <div class="next"><b>次の一手</b>動かすなら launchd に登録する</div>
+    </article>
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 デプロイ未実施</span>
+      <h4>メルカリ 売上管理</h4>
+      <p class="desc">実装は済んでいますが、まだデプロイしていません。</p>
+      <div class="next"><b>次の一手</b>デプロイ先を決めて公開する</div>
+    </article>
+    <article class="card g-grn">
+      <span class="badge p-grn">🟢 稼働中</span>
+      <h4>Keepa せどり候補 自動発掘</h4>
+      <p class="desc">毎朝 06:30 に候補をLINEへ配信しています。</p>
+      <div class="next"><b>次の一手</b>そのまま運用（届いた候補を見るだけ）</div>
+    </article>
+    <article class="card g-grn">
+      <span class="badge p-grn">🟢 稼働中</span>
+      <h4>ホームセンター（カインズ×DCM）→ Amazon せどり</h4>
+      <p class="desc">公開済み。bin/refresh で更新する運用です。データは48時間で古くなります。</p>
+      <div class="next"><b>次の一手</b>定期的に更新をかけて鮮度を保つ</div>
+    </article>
+    <article class="card g-grn">
+      <span class="badge p-grn">🟢 稼働中</span>
+      <h4>エコオク 週次入札トラッカー＋クラウド在庫</h4>
+      <p class="desc">毎週 水曜21時に動きます。落札はすべて表示されます。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 完了</span>
+      <h4>エコリング 仕入れリサーチ＋1商品の深掘り</h4>
+      <p class="desc">逆画像検索と相場チェックで1商品を深く調べられます。</p>
+      <div class="next"><b>次の一手</b>必要なときに使う</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 完了</span>
+      <h4>アクセ利益商品 AIリサーチCLI</h4>
+      <p class="desc">257件のテストを通した状態で完成しています。</p>
+      <div class="next"><b>次の一手</b>必要なときに使う</div>
+    </article>
+  </div>
+</section>
+
+<!-- ③ -->
+<section class="sec biz wrap">
+  <div class="biz-head">
+    <div class="biz-no">③</div>
+    <div class="biz-txt">
+      <h3>SNSコンサル講師</h3>
+      <p>的場ブランドの講座・スクール・DRM集客。</p>
+      <div class="counts">
+        <span class="cnt c-all">全14件</span>
+        <span class="cnt c-red">あなた待ち 1</span>
+        <span class="cnt c-org">要対応 1</span>
+        <span class="cnt c-yel">未公開・作業残 5</span>
+        <span class="cnt c-blu">完了・公開済 7</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <article class="card g-red">
+      <span class="badge p-red">🔴 あなた待ち</span>
+      <h4>DRM特典14本＋ハブ の UTAGE 移行</h4>
+      <p class="desc">置き場所をUTAGEにする方針に変更。渡すファイル15点は完成しています。</p>
+      <p class="slug">手順書: docs/UTAGE-SETUP.md</p>
+      <div class="next"><b>次の一手</b>UTAGE で特典ページを作る（手順書のとおりに）</div>
+    </article>
+    <article class="card g-org">
+      <span class="badge p-org">🟠 要対応</span>
+      <h4>AI×SNS 自動化ツールキット</h4>
+      <p class="desc">公開済みですが、古いコミット履歴に内部ファイルが残ったままです。</p>
+      <div class="next"><b>次の一手</b>履歴に残った内部ファイルをどう扱うか、方針を決める</div>
+    </article>
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 作業残</span>
+      <h4>LINEリッチメニュー「AI副業タイプ診断」v3.2.0</h4>
+      <p class="desc">手元の最新版は完成。コード送信をやめて、特典直リンク＋LINEワンタップにしました。</p>
+      <div class="next"><b>次の一手</b>URL と @ID の差し替え11か所を直して push する</div>
+    </article>
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 未公開</span>
+      <h4>インスタ特典10本 全面刷新</h4>
+      <p class="desc">10本すべてを作り直して制作完了。まだ公開していません。</p>
+      <div class="next"><b>次の一手</b>公開の順番と時期を決める</div>
+    </article>
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 未公開</span>
+      <h4>「AI×SNS 収益化マニュアル」特典</h4>
+      <p class="desc">中身はできています。公開はまだです。</p>
+      <div class="next"><b>次の一手</b>公開するか、別の特典と束ねるかを決める</div>
+    </article>
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 未公開</span>
+      <h4>講義資料「ファン化の設計図」6章・図解45点</h4>
+      <p class="desc">v3まで作り込み済み。自己分析60分ワークと相手目線を足しました。</p>
+      <div class="next"><b>次の一手</b>使う場（講義・配布）を決めて公開する</div>
+    </article>
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 未公開</span>
+      <h4>「スマホでClaude×Higgsfield AI」図解ガイド</h4>
+      <p class="desc">単一HTMLの図解ガイド。接続まわりは一次ソースで裏取り済みです。</p>
+      <div class="next"><b>次の一手</b>公開先を決めて出す</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 公開済</span>
+      <h4>的場セミナー録画 3日限定の配布ページ</h4>
+      <p class="desc">動画を埋め込み、期限つきカウントダウンで配布。公開済みです。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 公開済</span>
+      <h4>AIスクール無料特典8点（「10大特典」）</h4>
+      <p class="desc">スクール用の無料特典8点。公開済みです。</p>
+      <div class="next"><b>次の一手</b>そのまま運用（デザイン仕様は守る）</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 公開済</span>
+      <h4>ショート動画特典 シリーズ4本</h4>
+      <p class="desc">台本・見せ方・ネタ・ファン化＆導線の4本。公開済みです。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 公開済</span>
+      <h4>AI副業特典6本（note／Manus など）</h4>
+      <p class="desc">note・Manus×IG・Canva・Kindle・GPTs・Suno の6本。公開済みです。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 完了</span>
+      <h4>AI×SNS セミナー集客LP</h4>
+      <p class="desc">講師=的場祐哉さんのセミナー集客ページ。完成済みです。</p>
+      <div class="next"><b>次の一手</b>次回セミナーで再利用</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 公開済</span>
+      <h4>Claude Code 導入ガイド 特典</h4>
+      <p class="desc">ターミナルでの導入手順を図解でまとめた特典。公開済みです。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 完了</span>
+      <h4>特典サムネイル6枚</h4>
+      <p class="desc">HTML から PNG を書き出す方式で6枚作成済みです。</p>
+      <div class="next"><b>次の一手</b>必要なときに流用</div>
+    </article>
+  </div>
+</section>
+
+<!-- ④ -->
+<section class="sec biz wrap">
+  <div class="biz-head">
+    <div class="biz-no">④</div>
+    <div class="biz-txt">
+      <h3>自分のSNS発信</h3>
+      <p>自分のアカウントでの発信とリサーチ。</p>
+      <div class="counts">
+        <span class="cnt c-all">全9件</span>
+        <span class="cnt c-yel">未公開・作業残 1</span>
+        <span class="cnt c-grn">稼働中 2</span>
+        <span class="cnt c-blu">完了・公開済 6</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 次工程</span>
+      <h4>claude.ai プロジェクト「ストーリー作成」</h4>
+      <p class="desc">文体を取り出して再現する10コマンドを構築済みです。</p>
+      <div class="next"><b>次の一手</b>過去ストーリーのスクショを集めて棚卸しする</div>
+    </article>
+    <article class="card g-grn">
+      <span class="badge p-grn">🟢 稼働中</span>
+      <h4>インスタ AIバズレーダー</h4>
+      <p class="desc">毎日 07:30 に伸びている投稿をLINEへ配信します。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-grn">
+      <span class="badge p-grn">🟢 稼働中</span>
+      <h4>AIバズ動画ダッシュボード＋スマホ用リサーチアプリ</h4>
+      <p class="desc">集めたデータを画面で見られます。スマホからも見られます。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 公開済</span>
+      <h4>note 初投稿「AI副業のはじめ方」</h4>
+      <p class="desc">2026-07-13 に公開しました。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 完了</span>
+      <h4>Higgsfield 全自動リール生成</h4>
+      <p class="desc">テーマを入れると9:16のリールが出来上がります。実績ありです。</p>
+      <div class="next"><b>次の一手</b>必要なときに使う</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 完了</span>
+      <h4>AI動画 自動編集（トーク → 縦型ショート）</h4>
+      <p class="desc">長い話し動画から縦型ショートを作ります。完成済みです。</p>
+      <div class="next"><b>次の一手</b>必要なときに使う</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 公開済</span>
+      <h4>TikTok 美容アフィリ アカウント設計ツール</h4>
+      <p class="desc">動画355本／商品51件を取り込んだ状態で公開しています。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 公開済</span>
+      <h4>インスタ用語辞典アプリ</h4>
+      <p class="desc">インスタの用語を引けるアプリ。公開済みです。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 完了</span>
+      <h4>台本ダブルチェッカー</h4>
+      <p class="desc">台本を自動でチェックするツール。手元専用（非公開）で完成しています。</p>
+      <div class="next"><b>次の一手</b>手元で使うだけ</div>
+    </article>
+  </div>
+</section>
+
+<!-- ⑤ -->
+<section class="sec biz wrap">
+  <div class="biz-head">
+    <div class="biz-no">⑤</div>
+    <div class="biz-txt">
+      <h3>BチームSNS運用</h3>
+      <p>編集チームに任せるSNS運用。</p>
+      <div class="counts">
+        <span class="cnt c-all">全1件</span>
+        <span class="cnt c-blu">完了・公開済 1</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 公開済</span>
+      <h4>リール編集者向け 配布マニュアル</h4>
+      <p class="desc">編集をお願いする人に渡すマニュアル。公開済みです。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+  </div>
+</section>
+
+<!-- ⑥ -->
+<section class="sec biz wrap">
+  <div class="biz-head">
+    <div class="biz-no">⑥</div>
+    <div class="biz-txt">
+      <h3>セールスBチーム</h3>
+      <p>営業・採用まわり。</p>
+      <div class="counts">
+        <span class="cnt c-all">全2件</span>
+        <span class="cnt c-yel">未公開・作業残 1</span>
+        <span class="cnt c-blu">完了・公開済 1</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 未修正</span>
+      <h4>採用組織 recruiting-ops の設定パス不整合</h4>
+      <p class="desc">設定ファイルのパスが合っていない状態で放置されています。</p>
+      <div class="next"><b>次の一手</b>パスの不整合を直す</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 完了</span>
+      <h4>営業職 採用サイト＋ATS</h4>
+      <p class="desc">採用ページと応募管理。手元（ローカル）限定で完成しています。</p>
+      <div class="next"><b>次の一手</b>採用を始めるときに公開を検討</div>
+    </article>
+  </div>
+</section>
+
+<!-- ⑦ -->
+<section class="sec biz wrap">
+  <div class="biz-head">
+    <div class="biz-no">⑦</div>
+    <div class="biz-txt">
+      <h3>本部・共通基盤</h3>
+      <p>経営・お金・社内自動化。</p>
+      <div class="counts">
+        <span class="cnt c-all">全12件</span>
+        <span class="cnt c-red">あなた待ち 3</span>
+        <span class="cnt c-yel">未公開・作業残 3</span>
+        <span class="cnt c-grn">稼働中 4</span>
+        <span class="cnt c-blu">完了・公開済 2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <article class="card g-red">
+      <span class="badge p-red">🔴 あなた待ち</span>
+      <h4>法人化＋2025年分の期限後申告</h4>
+      <p class="desc">資料19本は完成しています。あとは方針の決めどころが4つ残っています。</p>
+      <div class="next"><b>次の一手</b>要判断4点に回答する</div>
+    </article>
+    <article class="card g-red">
+      <span class="badge p-red">🔴 あなた待ち</span>
+      <h4>マネーフォワードへの接続</h4>
+      <p class="desc">Chrome拡張の「金融サイト保護」でブロックされ、開けない状態です。</p>
+      <div class="next"><b>次の一手</b>拡張のサイト許可を1クリックする</div>
+    </article>
+    <article class="card g-red">
+      <span class="badge p-red">🔴 あなた待ち</span>
+      <h4>ボイスメモ 文字起こしツール</h4>
+      <p class="desc">音声を文字にして要約するツール。macOS の許可でつまずいています。</p>
+      <div class="next"><b>次の一手</b>マイクの許可（TCC）を解除する</div>
+    </article>
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 作業残</span>
+      <h4>補助金（返済不要）の申請準備</h4>
+      <p class="desc">調査は完了し、現実的な線として160万円が見えています。</p>
+      <div class="next"><b>次の一手</b>古物商の変更届が必要かどうかを確認する</div>
+    </article>
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 未完</span>
+      <h4>2026年7月 業務改善の鍵ローテーション</h4>
+      <p class="desc">鍵の入れ替えが途中のまま残っています。</p>
+      <div class="next"><b>次の一手</b>残っている鍵を入れ替える</div>
+    </article>
+    <article class="card g-yel">
+      <span class="badge p-yel">🟡 作業残</span>
+      <h4>月次請求書 3シリーズ 一括生成</h4>
+      <p class="desc">実装とテストは終わっています。あと少しの設定だけ残っています。</p>
+      <div class="next"><b>次の一手</b>スプレッドシートのURLと Chatwork の room_id を設定する</div>
+    </article>
+    <article class="card g-grn">
+      <span class="badge p-grn">🟢 稼働中</span>
+      <h4>LINE → Mac Claude 遠隔実行ブリッジ</h4>
+      <p class="desc">スマホのLINEからMacに指示を出せます。常に動いています。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-grn">
+      <span class="badge p-grn">🟢 稼働中</span>
+      <h4>日次リサーチ → LINE通知</h4>
+      <p class="desc">毎日 07:00 に結果がLINEへ届きます。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-grn">
+      <span class="badge p-grn">🟢 稼働中</span>
+      <h4>ChatWork 依頼 → 特典LP 自動生成ブリッジ</h4>
+      <p class="desc">2分ごとに依頼ルームを見に行き、特典LPを自動で作ります。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-grn">
+      <span class="badge p-grn">🟢 稼働中</span>
+      <h4>特典LP 自動生成アプリ</h4>
+      <p class="desc">手元の localhost:47877 で動いています。</p>
+      <div class="next"><b>次の一手</b>そのまま運用</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 完了</span>
+      <h4>ChatCut × Claude 日本語 動画編集ブリッジ</h4>
+      <p class="desc">日本語の指示で動画編集ができます。通しの動作確認まで済みました。</p>
+      <div class="next"><b>次の一手</b>必要なときに使う</div>
+    </article>
+    <article class="card g-blu">
+      <span class="badge p-blu">🔵 完了</span>
+      <h4>教材「AI社員の教科書」の実装</h4>
+      <p class="desc">1社3事業部10ロールの構成で実装済みです。</p>
+      <div class="next"><b>次の一手</b>教材として活用</div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== (5) フッター ===== -->
+<footer>
+  <div class="wrap">
+    <p>データ基準: メモリ索引 2026-08-30 時点 ／ 本図解は状況スナップショットです</p>
+    <p>掲載タスク 52件（🔴6 ・🟠2 ・🟡14 ・🟢10 ・🔵20）</p>
+    <p>限定共有用ページ。URLを知っている人だけが見られます（検索エンジン除外設定済み）</p>
+  </div>
+</footer>
+
+</body>
+</html>
