@@ -135,6 +135,28 @@ h2{font-size:clamp(21px,4.4vw,30px); font-weight:900; letter-spacing:-.02em; lin
 .b-talk .bl{color:var(--blu-dk)}
 .b-talk p{color:#123A5E}
 
+/* ---------- 実測データボックス ---------- */
+.databox{
+  background:#F1FAF5; border:1px solid #C4E6D5; border-left:6px solid var(--grn);
+  border-radius:16px; padding:16px 18px; box-shadow:var(--shadow);
+}
+.databox .dt{
+  display:block; font-size:13.5px; font-weight:900; color:var(--grn-dk);
+  letter-spacing:.03em; margin-bottom:9px;
+}
+.databox ul{list-style:none; display:grid; gap:9px}
+.databox li{
+  position:relative; padding-left:17px;
+  font-size:15px; font-weight:600; color:#1C4535; line-height:1.9;
+}
+.databox li::before{
+  content:"▸"; position:absolute; left:0; top:0;
+  color:var(--grn); font-weight:900;
+}
+.databox .src{font-size:12.5px; font-weight:800; color:#3F7C60; overflow-wrap:anywhere}
+.srcnote{font-size:12.5px; font-weight:800; color:var(--grn-dk); overflow-wrap:anywhere}
+.b-problem .srcnote{color:#8A3A3F}
+
 /* ---------- 横断課題 ---------- */
 .cross{
   background:var(--ink); border-radius:24px; padding:30px 26px;
@@ -172,6 +194,8 @@ footer p{font-size:13px; color:var(--ink3); font-weight:700}
   .block{grid-template-columns:1fr; gap:4px; padding:14px 15px}
   .block .bl{padding-top:0}
   .block p{font-size:15px}
+  .databox{padding:14px 15px}
+  .databox li{font-size:14.5px; line-height:1.85}
   .biz-head{padding:15px}
   .biz-no{flex:0 0 44px; width:44px; height:44px; font-size:19px}
   .notice{padding:16px 15px; border-radius:16px}
@@ -198,7 +222,7 @@ footer p{font-size:13px; color:var(--ink3); font-weight:700}
     <!-- ===== (2) 正直さの注意書き ===== -->
     <div class="notice">
       <div class="nt">はじめにお読みください</div>
-      <p>この資料はAIアシスタント(Claude)が作業記録から書き起こしたものです。<strong>売上・顧客数・フォロワー数などの実数値は記録に無いため載せていません</strong>(推測で埋めることはしていません)。空欄は壁打ちの場で本人に聞いてください。</p>
+      <p>この資料はAIアシスタント(Claude)が作業記録から書き起こし、<strong>2026-08-31にAPI・ローカルデータベース・vidIQで実測できた数字だけを出典付きで追記したもの</strong>です。それ以外の推測値はありません。UTAGEの読者数・LINE友だち数・会計データは本人のログインが必要でまだ取れていません。空欄は壁打ちの場で本人に聞いてください。</p>
     </div>
   </div>
 </header>
@@ -350,6 +374,14 @@ footer p{font-size:13px; color:var(--ink3); font-weight:700}
     <div class="block"><div class="bl">一言でいうと</div><p>自分で仕入れて売る物販。ブランドアクセサリーの業者オークション仕入れと、Amazon向けのせどりの2本立て。</p></div>
     <div class="block"><div class="bl">いまの進め方</div><p>仕入れ候補探しはほぼ自動化済み。業者オークション(エコオク)の週次入札トラッカー、利益商品のAIリサーチ、Amazonせどり候補の毎朝LINE配信(Keepa・ホームセンター)が回っている。</p></div>
     <div class="block"><div class="bl">どこまで来てるか</div><p>「探す」工程の自動化はかなり完成。一方で「売れた後」の売上管理ツールは作ったまま未稼働。</p></div>
+    <div class="databox">
+      <span class="dt">📊 実測データ(2026-08-31取得)</span>
+      <ul>
+        <li>エコオク自動入札トラッカー: 累計57回実行(4時間ごと)・収集商品479件・落札の請求書23件(=実際の仕入れ実績が出ている) <span class="src">[出典: ecoauc-bid-tracker/db.sqlite]</span></li>
+        <li>Keepaせどり: 仕入れ候補を累計1,387件発掘(直近実行 2026-08-31 06:30)。ただし成約(deals)の記録は0件=発掘から仕入れへの接続が未確認 <span class="src">[出典: keepa-arbitrage-scout/db.sqlite]</span></li>
+        <li>メルカリ売上管理: 実データ0件(ツールはあるが未稼働) <span class="src">[出典: mercari-sales-tracker/ 配下]</span></li>
+      </ul>
+    </div>
     <div class="block b-problem"><div class="bl">課題・問題点</div><p>(1)売上・利益の実数がこの記録上に無く、どの仕入れ経路が儲かっているか振り返れない。(2)ツールは揃ったが、実際の仕入れ・販売にどれだけ使えているかが見えない。</p></div>
     <div class="block b-talk"><div class="bl">壁打ちしたい論点</div><p>物販の月次の数字をどう見える化するか/コンサル事業との時間配分。</p></div>
   </div>
@@ -368,7 +400,7 @@ footer p{font-size:13px; color:var(--ink3); font-weight:700}
     <div class="block"><div class="bl">一言でいうと</div><p>「AI×SNSで稼ぐ」を教える講師業。SNS発信→LINE登録→無料特典→セミナー→講座、という王道のDRM(ダイレクトレスポンスマーケティング)型。</p></div>
     <div class="block"><div class="bl">いまの進め方</div><p>無料特典(リードマグネット)をAIで大量制作し、LINE登録の魅力にする戦略。特典は診断ツール・マニュアル・講座など30本以上が完成済み。セミナーも実施済みで録画の限定配布までやった。</p></div>
     <div class="block"><div class="bl">どこまで来てるか</div><p>特典資産は非常に厚い。いまはホスティングをUTAGE(マーケティングツール)に移す途中で、特典14本セットの置き場所づくりが本人作業待ち。LINEリッチメニューの診断も新バージョンが差し替え待ち。</p></div>
-    <div class="block b-problem"><div class="bl">課題・問題点</div><p>(1)「作る力」に対して「配る・売る」の実行が追いついておらず、未公開の完成品が多い。(2)リスト数・成約実績はこの記録上に無い。(3)過去に公開したツールキットのリポジトリに内部ファイルの履歴が残ったままという宿題が1件。</p></div>
+    <div class="block b-problem"><div class="bl">課題・問題点</div><p>(1)「作る力」に対して「配る・売る」の実行が追いついておらず、未公開の完成品が多い。(2)リスト数(LINE友だち数・UTAGE読者数)は今回実測を試みたが取得できず: LINEのAPIトークンはCloudflare Secretで読み出し不可の設計、UTAGEは未ログインのため閲覧不可。本人が管理画面を開けば数分で分かるので、壁打ちの場で確認するのが早い。(3)過去に公開したツールキットのリポジトリに内部ファイルの履歴が残ったままという宿題が1件。</p></div>
     <div class="block b-talk"><div class="bl">壁打ちしたい論点</div><p>この事業の売上目標と、セミナー→講座の販売導線をいつ完成させるか/特典の出し方(小出しか一気か)/①のアクセコンサルとどちらを主軸にするか。</p></div>
   </div>
 </section>
@@ -385,8 +417,8 @@ footer p{font-size:13px; color:var(--ink3); font-weight:700}
   <div class="blocks">
     <div class="block"><div class="bl">一言でいうと</div><p>集客の入口になる自分自身のSNS(Instagram・TikTok・note)での発信。</p></div>
     <div class="block"><div class="bl">いまの進め方</div><p>発信を楽にする道具立てが先行して完成している。伸びている投稿を毎朝自動収集するレーダー、リール動画の自動生成・自動編集、ストーリー文面の生成プロジェクトなど。</p></div>
-    <div class="block"><div class="bl">どこまで来てるか</div><p>リサーチと制作のインフラはほぼ完成。一方で、発信実績としてこの記録に残っているのはnote記事1本(2026-07-13公開)のみ。Instagramの実際の投稿頻度・フォロワー数は記録に無い。</p></div>
-    <div class="block b-problem"><div class="bl">課題・問題点</div><p>(1)道具は揃ったが発信の継続実績が記録上見えない。(2)③の集客はSNS発信が入口のはずで、ここが動かないと導線全体が始まらない。</p></div>
+    <div class="block"><div class="bl">どこまで来てるか</div><p>Instagramアカウント @yuya_ai_fukugyo(肩書「AI×インスタの専門家」)が実在し、フォロワー14,000・投稿127本。直近12本のリール平均再生は約4,540回(最高10,655回)。ただし最終投稿は2026-08-23で、8日間投稿が止まっている(2026-08-31時点)。noteは2026-07-13の1本。TikTokの本人アカウントは記録から特定できなかった。<span class="srcnote">[出典: vidIQ実測 2026-08-31]</span></p></div>
+    <div class="block b-problem"><div class="bl">課題・問題点</div><p>(1)フォロワー14,000の資産があるのに、直近8日間投稿が止まっている。(2)毎朝の自動リサーチ(バズレーダー)が認証エラーで実質停止中(直近クロール2026-08-31 07:35失敗・本番LINE配信実績0件)。道具の見た目は揃っているが、実際には回っていないものがある。<span class="srcnote">[出典: insta-ai-radar/data/radar.db]</span></p></div>
     <div class="block b-talk"><div class="bl">壁打ちしたい論点</div><p>発信の頻度と型を決めて習慣化する方法/どのSNSに集中するか/発信を人に任せる(⑤)への移行時期。</p></div>
   </div>
 </section>
@@ -441,6 +473,12 @@ footer p{font-size:13px; color:var(--ink3); font-weight:700}
     <div class="block"><div class="bl">いまの進め方</div><p>日々の作業をAI社員(自動化システム)にやらせる体制づくりを進めている。LINEからMacのAIを遠隔で動かす仕組み、請求書の自動生成、日次リサーチ配信などが常駐稼働中。</p></div>
     <div class="block"><div class="bl">どこまで来てるか</div><p>自動化はかなり進んでいる。一方で、法人化+2025年分の期限後申告は資料19本が完成した状態で「本人の要判断4点」で停止中。返済不要の補助金も調査済み(現実的な線として約160万円)で申請準備が途中。</p></div>
     <div class="block b-problem"><div class="bl">課題・問題点</div><p>(1)法人化・申告という期限リスクのある案件が判断待ちで止まっている。(2)会計データ(マネーフォワード)との接続がブロックされたままで、数字を自動で見る土台が無い。</p></div>
+    <div class="databox">
+      <span class="dt">📊 実測データ(2026-08-31取得)</span>
+      <ul>
+        <li>法人化の要判断4点の中身: ①エポスカード決済 ¥1,639,744 の用途特定(所得へ±164万円の影響) ②判定不能な支出 ¥367,947 の使途 ③期首・期末の棚卸高 ④転居月(横浜→甲府)と年齢(国保料の按分に必要) <span class="src">[出典: houjin-tax-2026/README.md]</span></li>
+      </ul>
+    </div>
     <div class="block b-talk"><div class="bl">壁打ちしたい論点</div><p>法人化の判断を進める段取り/事業ごとの売上・利益を毎月見られるようにする仕組み。</p></div>
   </div>
 </section>
@@ -457,7 +495,7 @@ footer p{font-size:13px; color:var(--ink3); font-weight:700}
       </li>
       <li>
         <div class="cn">2</div>
-        <p><strong>数字が見えない。</strong> 売上・利益・リスト数・フォロワー数がどの事業も記録に無く、どこに時間を使うべきかをデータで判断できない。会計接続も止まっている。</p>
+        <p><strong>数字が一部見えてきたが、要の数字がまだ無い。</strong> 今回の実測でIGフォロワー14,000・エコオク落札23件などは判明した。しかし売上・利益・リスト数は、会計(マネーフォワード)・UTAGE・LINE管理画面がすべて本人ログイン待ちで見えないまま。</p>
       </li>
       <li>
         <div class="cn">3</div>
@@ -467,6 +505,10 @@ footer p{font-size:13px; color:var(--ink3); font-weight:700}
         <div class="cn">4</div>
         <p><strong>本人1アクションで動き出すものが6件ある</strong>(詳細は<a href="tasks.html" style="color:var(--blu); font-weight:800">別紙のタスクマップ</a>)。</p>
       </li>
+      <li>
+        <div class="cn">5</div>
+        <p><strong>「稼働中」のはずが止まっているものがあった。</strong> バズレーダーは認証エラーで停止中(配信実績0件)だった。自動化システムの死活監視も課題。</p>
+      </li>
     </ol>
   </div>
 </section>
@@ -474,7 +516,7 @@ footer p{font-size:13px; color:var(--ink3); font-weight:700}
 <!-- ===== (6) フッター ===== -->
 <footer>
   <div class="wrap">
-    <p>限定共有用。検索エンジン除外済み / 作業記録ベース・実数値なし / 2026-08-31版</p>
+    <p>限定共有用。検索エンジン除外済み / 作業記録ベース＋実測データ / 2026-08-31版(実測データ反映)</p>
     <p><a href="tasks.html" style="color:var(--blu); font-weight:800">→ 細かいタスク一覧はこちら（別紙: 全タスクマップ）</a></p>
   </div>
 </footer>
