@@ -7,577 +7,587 @@
   <title>ゆうやの仕事マップ｜2026-10-30</title>
   <style>
     :root {
-      --ink: #17212b;
-      --muted: #5e6b77;
-      --line: #d9e1e8;
-      --paper: #f6f8fa;
-      --white: #fff;
-      --blue: #2f6fed;
-      --blue-soft: #edf3ff;
-      --green: #168260;
-      --green-soft: #eaf8f2;
-      --amber: #a76712;
-      --amber-soft: #fff5df;
-      --violet: #7655c7;
-      --violet-soft: #f3efff;
-      --shadow: 0 12px 34px rgba(35, 50, 66, .08);
-      --radius: 18px;
+      --ink: #171717;
+      --muted: #5f5f5f;
+      --quiet: #666666;
+      --line: #dedede;
+      --line-strong: #c8c8c8;
+      --canvas: #f7f7f7;
+      --surface: #ffffff;
+      --surface-2: #f0f0f0;
+      --blue: hsl(215 90% 42%);
+      --blue-soft: hsl(215 100% 96%);
+      --orange: hsl(35 100% 32%);
+      --orange-soft: hsl(35 100% 95%);
+      --radius: 12px;
+      --sidebar: 220px;
     }
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
       color: var(--ink);
-      background: var(--paper);
+      background: var(--canvas);
       font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
-      line-height: 1.65;
+      line-height: 1.55;
     }
-    a { color: inherit; }
-    button, input, select { font: inherit; }
-    button { color: inherit; }
-    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
-    .hero {
-      padding: 56px 0 40px;
-      background:
-        radial-gradient(circle at 88% 16%, rgba(47,111,237,.11), transparent 31%),
-        linear-gradient(180deg, #fff 0%, #f6f8fa 100%);
+    button, input, select, summary { font: inherit; }
+    button, select, summary { color: inherit; }
+    button { cursor: pointer; }
+    .shell { width: min(1360px, calc(100% - 40px)); margin: 0 auto; }
+
+    .app-header {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      background: var(--surface);
       border-bottom: 1px solid var(--line);
     }
-    .eyebrow {
-      display: inline-flex;
+    .header-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 0; }
+    .brand { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+    h1 { margin: 0; font-size: 1.45rem; line-height: 1.2; letter-spacing: -.025em; }
+    .asof { color: var(--muted); font-size: .8rem; white-space: nowrap; }
+    .purpose { margin: 0; color: var(--muted); font-size: .82rem; text-align: right; }
+    .purpose strong { color: var(--ink); }
+
+    .overview-wrap { background: var(--surface); border-bottom: 1px solid var(--line); }
+    .overview { padding: 0; }
+    .overview > summary {
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      list-style: none;
+      cursor: pointer;
+      font-size: .85rem;
+      font-weight: 750;
+    }
+    .overview > summary::-webkit-details-marker,
+    .work-item > summary::-webkit-details-marker { display: none; }
+    .overview > summary::before { content: "+"; width: 18px; color: var(--blue); font-size: 1rem; text-align: center; }
+    .overview[open] > summary::before { content: "−"; }
+    .overview > summary span { color: var(--muted); font-size: .76rem; font-weight: 500; }
+    .overview-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; padding: 0 0 14px 27px; }
+    .overview-item { padding: 11px 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--canvas); }
+    .overview-item strong { display: block; margin-bottom: 4px; font-size: .85rem; }
+    .overview-item p { margin: 0; color: var(--muted); font-size: .76rem; }
+    .overview-item b { color: var(--blue); font-weight: 800; }
+
+    .workspace { display: grid; grid-template-columns: var(--sidebar) minmax(0,1fr); gap: 24px; padding-top: 22px; padding-bottom: 60px; }
+    .sidebar { align-self: start; position: sticky; top: 12px; }
+    .sidebar h2 { margin: 0 0 8px; padding: 0 10px; color: var(--muted); font-size: .75rem; letter-spacing: .06em; }
+    .business-nav { display: grid; gap: 3px; }
+    .business-button {
+      width: 100%;
+      min-height: 44px;
+      display: grid;
+      grid-template-columns: 24px 1fr auto;
       gap: 8px;
       align-items: center;
-      color: var(--blue);
-      font-weight: 800;
-      letter-spacing: .04em;
-      font-size: .82rem;
+      padding: 8px 10px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      background: transparent;
+      text-align: left;
     }
-    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
-    h1 { margin: 12px 0 8px; font-size: clamp(2rem, 5vw, 4rem); line-height: 1.12; letter-spacing: -.04em; }
-    .lead { margin: 0; color: var(--muted); font-size: clamp(1rem, 2vw, 1.16rem); max-width: 760px; }
-    .asof { margin-top: 20px; color: var(--muted); font-size: .86rem; }
-    .map { margin-top: 36px; }
-    .goal {
-      position: relative;
-      z-index: 2;
-      width: min(520px, 100%);
-      margin: 0 auto;
-      padding: 22px 28px;
-      text-align: center;
-      border-radius: 999px;
-      color: #fff;
-      background: var(--ink);
-      box-shadow: var(--shadow);
-    }
-    .goal small { display: block; color: #bcc7d1; font-size: .72rem; font-weight: 800; letter-spacing: .08em; }
-    .goal strong { display: block; margin-top: 2px; font-size: clamp(1.2rem, 3vw, 1.75rem); }
-    .engines {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 42px;
-    }
-    .engines::before {
-      content: "";
-      position: absolute;
-      top: -22px;
-      left: 16.66%;
-      right: 16.66%;
-      border-top: 2px solid #b8c5d3;
-    }
-    .engine {
-      position: relative;
-      min-height: 160px;
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--white);
-      box-shadow: var(--shadow);
-    }
-    .engine::before { content: ""; position: absolute; left: 50%; top: -22px; height: 22px; border-left: 2px solid #b8c5d3; }
-    .engine h2 { margin: 0 0 5px; font-size: 1.2rem; }
-    .engine p { margin: 0; color: var(--muted); font-size: .9rem; }
-    .engine-tags { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 15px; }
-    .engine-tags span { padding: 5px 9px; border-radius: 999px; background: #f0f3f6; font-size: .75rem; font-weight: 700; }
-    .support {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 18px;
-      align-items: center;
-      margin-top: 16px;
-      padding: 18px 22px;
-      border: 1px dashed #a9b7c5;
-      border-radius: 15px;
-      background: rgba(255,255,255,.7);
-    }
-    .support strong { white-space: nowrap; }
-    .support p { margin: 0; color: var(--muted); font-size: .88rem; }
-    .business-map-tag { display: inline-flex; width: fit-content; padding: 5px 9px; border-radius: 999px; background: #edf0f3; font-size: .75rem; font-weight: 800; }
-    .support-note { grid-column: 1 / -1; padding-top: 10px; border-top: 1px solid var(--line); color: var(--muted); font-size: .78rem; }
-    main { padding: 46px 0 72px; }
-    .section-head { display: flex; justify-content: space-between; gap: 20px; align-items: end; margin-bottom: 20px; }
-    .section-head h2 { margin: 0; font-size: clamp(1.45rem, 3vw, 2.1rem); letter-spacing: -.025em; }
-    .section-head p { margin: 4px 0 0; color: var(--muted); }
-    .proposal { padding: 5px 10px; border-radius: 999px; background: var(--amber-soft); color: var(--amber); font-size: .74rem; font-weight: 800; white-space: nowrap; }
-    .connections { display: grid; grid-template-columns: 1.15fr .85fr; gap: 13px; margin-bottom: 14px; }
-    .connection { padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow); }
-    .connection h3 { margin: 0; font-size: 1.05rem; }
-    .connection > p { margin: 4px 0 16px; color: var(--muted); font-size: .8rem; }
-    .mini-flow { display: flex; align-items: stretch; gap: 20px; }
-    .flow-node { position: relative; display: grid; place-items: center; min-height: 66px; flex: 1; padding: 10px; border-radius: 12px; background: var(--blue-soft); color: #244f9d; text-align: center; font-size: .82rem; font-weight: 900; }
-    .flow-node:not(:last-child)::after { content: "→"; position: absolute; right: -17px; top: 50%; transform: translateY(-50%); color: #8190a0; font-size: 1.1rem; }
-    .connection.merch .flow-node { color: #12674d; background: var(--green-soft); }
-    .support-lanes { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin-bottom: 44px; }
-    .support-lane { display: grid; grid-template-columns: auto 1fr; gap: 13px; align-items: center; padding: 15px 18px; border: 1px dashed #a9b7c5; border-radius: 14px; background: rgba(255,255,255,.72); }
-    .support-lane strong { white-space: nowrap; }
-    .support-lane span { color: var(--muted); font-size: .82rem; }
-    .states { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 18px 0 34px; }
-    .state-key { display: flex; gap: 10px; align-items: center; padding: 13px; background: var(--white); border: 1px solid var(--line); border-radius: 12px; font-size: .82rem; }
-    .state-dot { flex: 0 0 auto; width: 11px; height: 11px; border-radius: 50%; background: var(--blue); }
-    .state-key[data-key="recurring"] .state-dot { background: var(--green); }
-    .state-key[data-key="confirm"] .state-dot { background: var(--amber); }
-    .state-key[data-key="asset"] .state-dot { background: var(--violet); }
-    .state-key strong { display: block; font-size: .86rem; }
-    .state-key span { color: var(--muted); font-size: .74rem; }
-    .tools {
+    .business-button:hover { background: var(--surface-2); }
+    .business-button[aria-pressed="true"] { color: var(--blue); border-color: var(--line); background: var(--surface); font-weight: 750; }
+    .business-number { color: var(--quiet); font-size: .76rem; font-variant-numeric: tabular-nums; }
+    .business-button[aria-pressed="true"] .business-number { color: var(--blue); }
+    .business-name { min-width: 0; font-size: .84rem; }
+    .business-count { color: var(--quiet); font-size: .75rem; font-variant-numeric: tabular-nums; }
+
+    .work-panel { min-width: 0; }
+    .mobile-business { display: none; }
+    .controls {
       position: sticky;
       top: 0;
-      z-index: 20;
-      margin: 0 0 18px;
-      padding: 14px;
+      z-index: 10;
+      padding: 0 0 12px;
+      background: var(--canvas);
+    }
+    .search-row { display: grid; grid-template-columns: minmax(220px, 1fr) auto; gap: 8px; }
+    .search-input, .mobile-business select {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      color: var(--ink);
+      background: var(--surface);
+    }
+    .search-input { padding: 0 14px; }
+    .search-input:focus, .mobile-business select:focus, button:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--blue-soft);
+      outline-offset: 1px;
+      border-color: var(--blue);
+    }
+    .reset-button {
+      min-height: 44px;
+      padding: 0 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      background: var(--surface);
+      font-size: .82rem;
+      font-weight: 750;
+    }
+    .reset-button:hover { border-color: var(--blue); color: var(--blue); }
+    .state-filters { display: flex; gap: 6px; margin-top: 8px; overflow-x: auto; scrollbar-width: thin; }
+    .state-button {
+      min-height: 44px;
+      flex: 0 0 auto;
+      padding: 0 13px;
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      background: var(--surface);
+      font-size: .79rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .state-button[aria-pressed="true"] { color: var(--surface); border-color: var(--blue); background: var(--blue); }
+    .state-button[data-state-filter="confirm"][aria-pressed="true"] { border-color: var(--orange); background: var(--orange); }
+    .state-button[data-state-filter="recurring"][aria-pressed="true"],
+    .state-button[data-state-filter="asset"][aria-pressed="true"] { border-color: var(--ink); background: var(--ink); }
+
+    .list-heading {
+      min-height: 42px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 2px 8px;
+      border-bottom: 1px solid var(--line-strong);
+    }
+    .list-heading h2 { margin: 0; font-size: 1rem; }
+    .list-heading p { margin: 0; color: var(--muted); font-size: .78rem; }
+    .result-count { color: var(--ink); font-weight: 800; }
+
+    .column-head {
+      display: grid;
+      grid-template-columns: 104px 128px minmax(190px,.8fr) minmax(300px,1.2fr) 22px;
+      gap: 12px;
+      padding: 8px 14px;
+      color: var(--quiet);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+      border-bottom: 1px solid var(--line);
+    }
+    .work-list { background: var(--surface); border: 1px solid var(--line); border-top: 0; }
+    .work-item { border-bottom: 1px solid var(--line); }
+    .work-item:last-child { border-bottom: 0; }
+    .work-item[hidden] { display: none; }
+    .work-item > summary {
+      min-height: 72px;
+      display: grid;
+      grid-template-columns: 104px 128px minmax(190px,.8fr) minmax(300px,1.2fr) 22px;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 14px;
+      list-style: none;
+      cursor: pointer;
+    }
+    .work-item > summary:hover { background: var(--canvas); }
+    .state-label {
+      width: fit-content;
+      max-width: 100%;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 7px;
+      border-radius: 6px;
+      color: var(--muted);
+      background: var(--surface-2);
+      font-size: .75rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .state-label::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--quiet); }
+    .work-item[data-state="focus"] .state-label { color: var(--blue); background: var(--blue-soft); }
+    .work-item[data-state="focus"] .state-label::before { background: var(--blue); }
+    .work-item[data-state="confirm"] .state-label { color: var(--orange); background: var(--orange-soft); }
+    .work-item[data-state="confirm"] .state-label::before { background: var(--orange); }
+    .work-item[data-state="asset"] .state-label::before { border-radius: 1px; background: var(--ink); }
+    .row-business { color: var(--muted); font-size: .76rem; }
+    .row-title { margin: 0; font-size: 1rem; line-height: 1.4; }
+    .next-action { margin: 0; color: var(--muted); font-size: .94rem; line-height: 1.45; }
+    .next-action strong { margin-right: 6px; color: var(--ink); font-size: .75rem; }
+    .chevron { color: var(--quiet); font-size: 1rem; text-align: center; transition: transform .16s ease; }
+    .work-item[open] .chevron { transform: rotate(180deg); }
+    .detail-body { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 22px; padding: 0 14px 16px 258px; background: var(--canvas); }
+    .detail-block { padding-top: 12px; border-top: 1px solid var(--line); }
+    .detail-block small { display: block; margin-bottom: 4px; color: var(--quiet); font-size: .75rem; font-weight: 800; }
+    .detail-block p { margin: 0; font-size: .82rem; }
+    .evidence { grid-column: 1 / -1; display: flex; gap: 12px; color: var(--quiet); font-size: .8rem; }
+
+    .empty {
+      display: none;
+      padding: 42px 20px;
       border: 1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(255,255,255,.94);
-      box-shadow: 0 8px 26px rgba(28,42,55,.1);
-      backdrop-filter: blur(12px);
+      border-top: 0;
+      background: var(--surface);
+      text-align: center;
     }
-    .tool-row { display: grid; grid-template-columns: minmax(220px, 1.35fr) minmax(180px, .75fr) auto; gap: 10px; }
-    .search, .business-select { width: 100%; min-height: 44px; border: 1px solid #c9d4df; border-radius: 10px; background: #fff; color: var(--ink); }
-    .search { padding: 0 14px; }
-    .business-select { padding: 0 36px 0 12px; }
-    .clear { min-height: 44px; padding: 0 15px; border: 1px solid #c9d4df; border-radius: 10px; background: #fff; cursor: pointer; font-weight: 800; }
-    .clear:hover, .clear:focus-visible { border-color: var(--blue); color: var(--blue); }
-    .state-filters { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 10px; }
-    .filter-button { padding: 7px 11px; border: 1px solid #c9d4df; border-radius: 999px; background: #fff; cursor: pointer; font-size: .8rem; font-weight: 800; }
-    .filter-button[aria-pressed="true"] { color: #fff; border-color: var(--ink); background: var(--ink); }
-    .tool-meta { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; color: var(--muted); font-size: .78rem; }
-    .result-count { font-weight: 800; color: var(--ink); }
-    .anchor-nav { display: flex; gap: 7px; overflow-x: auto; padding: 0 0 14px; scrollbar-width: thin; }
-    .anchor-nav a { flex: 0 0 auto; padding: 7px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); text-decoration: none; font-size: .78rem; font-weight: 800; }
-    .anchor-nav a:hover, .anchor-nav a:focus-visible { border-color: var(--blue); color: var(--blue); }
-    .business-section { scroll-margin-top: 150px; margin: 28px 0 38px; }
-    .business-heading { display: grid; grid-template-columns: auto 1fr auto; gap: 13px; align-items: center; margin-bottom: 13px; }
-    .business-number { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; color: #fff; background: var(--ink); font-weight: 900; }
-    .business-heading h2 { margin: 0; font-size: 1.25rem; }
-    .business-heading p { margin: 1px 0 0; color: var(--muted); font-size: .84rem; }
-    .business-count { padding: 5px 9px; border-radius: 999px; background: #e9eef3; color: var(--muted); font-size: .75rem; font-weight: 800; }
-    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
-    .card { position: relative; overflow: hidden; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); box-shadow: 0 7px 24px rgba(35,50,66,.055); }
-    .card::before { content: ""; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: var(--blue); }
-    .card[data-state="recurring"]::before { background: var(--green); }
-    .card[data-state="confirm"]::before { background: var(--amber); }
-    .card[data-state="asset"]::before { background: var(--violet); }
-    .card[hidden] { display: none; }
-    .card-top { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
-    .card h3 { margin: 0; font-size: 1.04rem; line-height: 1.45; }
-    .badge { flex: 0 0 auto; padding: 5px 9px; border-radius: 999px; color: var(--blue); background: var(--blue-soft); font-size: .72rem; font-weight: 900; }
-    .card[data-state="recurring"] .badge { color: var(--green); background: var(--green-soft); }
-    .card[data-state="confirm"] .badge { color: var(--amber); background: var(--amber-soft); }
-    .card[data-state="asset"] .badge { color: var(--violet); background: var(--violet-soft); }
-    .purpose { margin: 10px 0 16px; color: var(--muted); font-size: .85rem; }
-    .progress { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-    .progress > div { padding: 12px; }
-    .progress > div + div { border-left: 1px solid var(--line); background: #fafbfd; }
-    .progress small { display: block; margin-bottom: 4px; color: var(--muted); font-size: .68rem; font-weight: 900; letter-spacing: .05em; }
-    .progress p { margin: 0; font-size: .82rem; line-height: 1.55; }
-    .evidence { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 13px; color: var(--muted); font-size: .72rem; }
-    .evidence span { padding: 4px 7px; border-radius: 7px; background: #f0f3f6; }
-    .empty { display: none; padding: 42px 20px; border: 1px dashed #aab7c4; border-radius: 18px; text-align: center; background: var(--white); }
     .empty[aria-hidden="false"] { display: block; }
-    .empty h2 { margin: 0 0 5px; font-size: 1.2rem; }
-    .empty p { margin: 0 0 16px; color: var(--muted); }
-    footer { padding: 30px 0 44px; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
-    @media (max-width: 900px) {
-      .engines { grid-template-columns: 1fr; margin-top: 28px; }
-      .engines::before, .engine::before { display: none; }
-      .engine { min-height: 0; }
-      .connections { grid-template-columns: 1fr; }
-      .states { grid-template-columns: 1fr 1fr; }
+    .empty h2 { margin: 0 0 4px; font-size: 1rem; }
+    .empty p { margin: 0 0 14px; color: var(--muted); font-size: .82rem; }
+    footer { padding: 22px 0 36px; border-top: 1px solid var(--line); color: var(--quiet); font-size: .75rem; }
+
+    @media (max-width: 1120px) {
+      .shell { width: min(100% - 24px, 1360px); }
+      .app-header { min-height: 0; }
+      .header-row { align-items: start; flex-direction: column; gap: 5px; padding: 12px 0 10px; }
+      .brand { width: 100%; justify-content: space-between; gap: 10px; }
+      h1 { font-size: 1.25rem; }
+      .purpose { text-align: left; font-size: .76rem; }
+      .overview > summary { min-height: 44px; }
+      .overview > summary span { display: none; }
+      .overview-grid { grid-template-columns: 1fr; padding-left: 27px; }
+      .workspace { display: block; padding-top: 12px; }
+      .sidebar { display: none; }
+      .mobile-business { display: block; margin-bottom: 8px; }
+      .mobile-business label { display: block; margin-bottom: 4px; color: var(--muted); font-size: .75rem; font-weight: 700; }
+      .mobile-business select { padding: 0 34px 0 12px; }
+      .controls { padding-bottom: 8px; }
+      .search-row { grid-template-columns: minmax(0,1fr) auto; }
+      .reset-button { padding-inline: 11px; }
+      .state-filters { flex-wrap: wrap; margin-top: 6px; overflow: visible; }
+      .state-button { min-height: 44px; padding-inline: 11px; }
+      .list-heading { min-height: 36px; }
+      .column-head { display: none; }
+      .work-list { border-top: 1px solid var(--line); }
+      .work-item > summary {
+        min-height: 106px;
+        grid-template-columns: auto 1fr 22px;
+        grid-template-areas:
+          "state business arrow"
+          "title title arrow"
+          "next next arrow";
+        gap: 4px 8px;
+        padding: 10px 12px;
+      }
+      .state-label { grid-area: state; }
+      .row-business { grid-area: business; }
+      .row-title { grid-area: title; font-size: 1rem; }
+      .next-action { grid-area: next; font-size: .94rem; }
+      .chevron { grid-area: arrow; }
+      .detail-body { grid-template-columns: 1fr; gap: 10px; padding: 0 12px 14px; }
+      .evidence { grid-column: 1; flex-direction: column; gap: 2px; }
     }
-    @media (max-width: 640px) {
-      .wrap { width: min(100% - 24px, 1180px); }
-      .hero { padding: 36px 0 28px; }
-      .goal { border-radius: 20px; }
-      .support { grid-template-columns: 1fr; gap: 3px; }
-      main { padding-top: 32px; }
-      .section-head { align-items: start; flex-direction: column; gap: 8px; }
-      .states, .cards, .support-lanes { grid-template-columns: 1fr; }
-      .mini-flow { flex-direction: column; gap: 20px; }
-      .flow-node { min-height: 52px; }
-      .flow-node:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -20px; transform: translateX(50%); }
-      .support-lane { grid-template-columns: 1fr; gap: 2px; }
-      .tool-row { grid-template-columns: 1fr; }
-      .tools { top: 0; margin-inline: -4px; padding: 10px; border-radius: 0 0 14px 14px; }
-      .tool-meta { align-items: start; flex-direction: column; gap: 2px; }
-      .business-heading { grid-template-columns: auto 1fr; }
-      .business-count { grid-column: 2; justify-self: start; }
-      .card { padding: 17px; }
-      .card-top { flex-direction: column-reverse; }
-      .progress { grid-template-columns: 1fr; }
-      .progress > div + div { border-left: 0; border-top: 1px solid var(--line); }
-    }
+
     @media print {
       body { background: #fff; }
-      .hero { padding: 22px 0; }
-      .tools, .anchor-nav { display: none !important; }
-      .wrap { width: 100%; }
-      .card, .business-section { display: block !important; break-inside: avoid; }
-      .cards { grid-template-columns: 1fr 1fr; }
-      .engines, .connections, .support-lanes { break-inside: avoid; }
+      .app-header, .overview-wrap, .sidebar, .controls, .mobile-business, .column-head, footer { display: none !important; }
+      .shell { width: 100%; }
+      .workspace { display: block; padding: 0; }
+      .list-heading { padding-top: 0; }
+      .work-item, .work-item[hidden] { display: block !important; break-inside: avoid; }
+      .work-item > summary {
+        min-height: 0;
+        grid-template-columns: 82px 110px minmax(170px,.9fr) minmax(250px,1.2fr) 0;
+        grid-template-areas: none;
+        padding: 8px;
+      }
+      .state-label, .row-business, .row-title, .next-action, .chevron { grid-area: auto; }
+      .chevron { display: none; }
+      .detail-body { display: grid !important; grid-template-columns: 1fr 1fr; padding: 0 8px 10px; }
+      .evidence { grid-column: 1 / -1; flex-direction: row; gap: 12px; }
       .empty { display: none !important; }
     }
   </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="wrap">
-      <div class="eyebrow">仕事の全体像</div>
-      <h1>今の仕事を、<br>次の一手まで見渡す。</h1>
-      <p class="lead">何のための仕事か、どこまで進んだか、次に何が要るか。7つの事業を、関係が分かる形で整理しています。</p>
-      <p class="asof">確認基準日：2026年10月30日（JST）</p>
-      <div class="map" aria-label="仕事の目的と事業のまとまり">
-        <div class="goal"><small>いちばん上の目的</small><strong>長期の利益を増やす</strong></div>
-        <div class="engines">
-          <article class="engine">
-            <h2>仕入れて売る</h2>
-            <p>在庫・販売・精算までをつなぎ、毎月の利益を残す。</p>
-            <div class="engine-tags"><span>2 アクセサリー物販</span></div>
-          </article>
-          <article class="engine">
-            <h2>教えて支援する</h2>
-            <p>講義・特典・運営改善を通じて、成果が出る環境をつくる。</p>
-            <div class="engine-tags"><span>1 物販コンサル</span><span>3 SNS講師</span><span>5 Bチーム</span></div>
-          </article>
-          <article class="engine">
-            <h2>発信して集客する</h2>
-            <p>本人発信と販売導線を整え、相談や申込みにつなげる。</p>
-            <div class="engine-tags"><span>4 本人SNS</span><span>6 セールスB</span></div>
-          </article>
-        </div>
-        <div class="support"><strong>全体を支える仕事</strong><p>経費・申告と、事業を続けるための管理をまとめています。</p><span class="business-map-tag">7 全体管理</span><div class="support-note">発信・調査を支える仕組みも、案件ごとに状態を確認します。</div></div>
-      </div>
+  <header class="app-header">
+    <div class="shell header-row">
+      <div class="brand"><h1>仕事マップ</h1><span class="asof">2026年10月30日 現在</span></div>
+      <p class="purpose"><strong>目的：</strong>長期の利益を増やす</p>
     </div>
   </header>
 
-  <main class="wrap">
-    <section aria-labelledby="focus-title">
-      <div class="section-head">
-        <div><h2 id="focus-title">仕事のつながり</h2><p>依存関係がある仕事だけをつなぎ、独立して進む仕事は分けています。</p></div>
+  <div class="overview-wrap">
+    <details class="overview shell" id="overview">
+      <summary aria-expanded="false">事業の全体像 <span>7事業がどの役割につながるかを見る</span></summary>
+      <div class="overview-grid">
+        <div class="overview-item"><strong>仕入れて売る</strong><p><b>2</b> アクセサリー物販</p></div>
+        <div class="overview-item"><strong>教えて支援する</strong><p><b>1</b> 物販コンサル　<b>3</b> SNS講師　<b>5</b> Bチーム</p></div>
+        <div class="overview-item"><strong>発信と販売導線</strong><p><b>4</b> 本人SNS　<b>6</b> セールスB</p></div>
+        <div class="overview-item"><strong>全体を管理する</strong><p><b>7</b> 経費・申告・事業判断</p></div>
       </div>
-      <div class="connections">
-        <article class="connection">
-          <h3>発信から相談までの一般的な流れ</h3>
-          <p>企画ごとに導線は異なります。</p>
-          <div class="mini-flow"><span class="flow-node">企画・投稿</span><span class="flow-node">興味を持つ</span><span class="flow-node">動画・特典</span><span class="flow-node">相談</span></div>
-        </article>
-        <article class="connection merch">
-          <h3>物販の精算までの流れ</h3>
-          <p>照合が終わってから、共同精算を確定します。</p>
-          <div class="mini-flow"><span class="flow-node">販売履歴・<br>在庫照合</span><span class="flow-node">未確定を<br>解消</span><span class="flow-node">共同精算</span></div>
-        </article>
-      </div>
-      <div class="support-lanes">
-        <div class="support-lane"><strong>チーム改善</strong><span>数字と現場の声を見て、投稿・撮影・制作の動きを直す。</span></div>
-        <div class="support-lane"><strong>経営管理</strong><span>経費と支出を確認し、申告準備を独立して進める。</span></div>
-      </div>
-    </section>
+    </details>
+  </div>
 
-    <section aria-labelledby="status-title">
-      <div class="section-head"><div><h2 id="status-title">4つの状態で見る</h2><p>「未完了」の一言にまとめず、次に必要な動きを分けました。状態分けは、10月30日の確認内容をもとにした整理案です。</p></div></div>
-      <div class="states">
-        <div class="state-key" data-key="focus"><i class="state-dot"></i><div><strong>今進める</strong><span>次の成果につながる仕事</span></div></div>
-        <div class="state-key" data-key="recurring"><i class="state-dot"></i><div><strong>繰り返す業務</strong><span>毎日・毎週・毎月回す仕事</span></div></div>
-        <div class="state-key" data-key="confirm"><i class="state-dot"></i><div><strong>保留・要確認</strong><span>判断や最新状況の確認が要る仕事</span></div></div>
-        <div class="state-key" data-key="asset"><i class="state-dot"></i><div><strong>使える完成品</strong><span>できていて次に活用できるもの</span></div></div>
-      </div>
-    </section>
+  <main class="workspace shell">
+    <aside class="sidebar" aria-label="事業で絞り込む">
+      <h2>事業</h2>
+      <nav class="business-nav">
+        <button class="business-button" data-business-filter="all" aria-pressed="true" type="button"><span class="business-number">—</span><span class="business-name">すべての事業</span><span class="business-count">20</span></button>
+        <button class="business-button" data-business-filter="1" aria-pressed="false" type="button"><span class="business-number">01</span><span class="business-name">物販コンサル</span><span class="business-count">2</span></button>
+        <button class="business-button" data-business-filter="2" aria-pressed="false" type="button"><span class="business-number">02</span><span class="business-name">アクセサリー物販</span><span class="business-count">6</span></button>
+        <button class="business-button" data-business-filter="3" aria-pressed="false" type="button"><span class="business-number">03</span><span class="business-name">SNS講師・教育</span><span class="business-count">2</span></button>
+        <button class="business-button" data-business-filter="4" aria-pressed="false" type="button"><span class="business-number">04</span><span class="business-name">本人SNS</span><span class="business-count">4</span></button>
+        <button class="business-button" data-business-filter="5" aria-pressed="false" type="button"><span class="business-number">05</span><span class="business-name">Bチーム</span><span class="business-count">2</span></button>
+        <button class="business-button" data-business-filter="6" aria-pressed="false" type="button"><span class="business-number">06</span><span class="business-name">セールスB</span><span class="business-count">1</span></button>
+        <button class="business-button" data-business-filter="7" aria-pressed="false" type="button"><span class="business-number">07</span><span class="business-name">全体管理</span><span class="business-count">3</span></button>
+      </nav>
+    </aside>
 
-    <section class="tools" aria-label="仕事の絞り込み">
-      <div class="tool-row">
-        <input class="search" id="search" type="search" placeholder="仕事・次の一手を検索" aria-label="仕事を検索">
-        <select class="business-select" id="business-filter" aria-label="事業で絞り込む">
-          <option value="all">すべての事業</option>
-          <option value="1">1. アクセサリー物販コンサル</option>
-          <option value="2">2. アクセサリー物販</option>
-          <option value="3">3. SNS講師・教育</option>
-          <option value="4">4. 本人SNS</option>
-          <option value="5">5. Bチーム</option>
-          <option value="6">6. セールスBチーム</option>
-          <option value="7">7. 全体管理</option>
+    <section class="work-panel" aria-labelledby="work-title">
+      <div class="mobile-business">
+        <label for="business-select">事業</label>
+        <select id="business-select">
+          <option value="all">すべての事業（20）</option>
+          <option value="1">01 物販コンサル（2）</option>
+          <option value="2">02 アクセサリー物販（6）</option>
+          <option value="3">03 SNS講師・教育（2）</option>
+          <option value="4">04 本人SNS（4）</option>
+          <option value="5">05 Bチーム（2）</option>
+          <option value="6">06 セールスB（1）</option>
+          <option value="7">07 全体管理（3）</option>
         </select>
-        <button class="clear" id="clear" type="button">条件を解除</button>
       </div>
-      <div class="state-filters" role="group" aria-label="状態で絞り込む">
-        <button class="filter-button" data-filter-state="all" aria-pressed="true" type="button">すべて</button>
-        <button class="filter-button" data-filter-state="focus" aria-pressed="false" type="button">今進める</button>
-        <button class="filter-button" data-filter-state="recurring" aria-pressed="false" type="button">繰り返す業務</button>
-        <button class="filter-button" data-filter-state="confirm" aria-pressed="false" type="button">保留・要確認</button>
-        <button class="filter-button" data-filter-state="asset" aria-pressed="false" type="button">使える完成品</button>
+
+      <div class="controls" aria-label="仕事の絞り込み">
+        <div class="search-row">
+          <input class="search-input" id="search" type="search" placeholder="仕事・次の行動を検索" aria-label="仕事を検索">
+          <button class="reset-button" id="reset" type="button">解除</button>
+        </div>
+        <div class="state-filters" role="group" aria-label="状態で絞り込む">
+          <button class="state-button" data-state-filter="all" aria-pressed="true" type="button">全件 20</button>
+          <button class="state-button" data-state-filter="focus" aria-pressed="false" type="button">今進める 4</button>
+          <button class="state-button" data-state-filter="recurring" aria-pressed="false" type="button">繰り返す 4</button>
+          <button class="state-button" data-state-filter="confirm" aria-pressed="false" type="button">要確認 6</button>
+          <button class="state-button" data-state-filter="asset" aria-pressed="false" type="button">完成・保管 6</button>
+        </div>
       </div>
-      <div class="tool-meta"><span class="result-count" id="result-count" aria-live="polite">20件を表示</span><span>カードで、現在地と次の行動を確認できます。</span></div>
-    </section>
 
-    <nav class="anchor-nav" aria-label="7事業へのリンク">
-      <a href="#business-1">1 コンサル</a><a href="#business-2">2 物販</a><a href="#business-3">3 講師</a><a href="#business-4">4 本人SNS</a><a href="#business-5">5 Bチーム</a><a href="#business-6">6 セールスB</a><a href="#business-7">7 全体管理</a>
-    </nav>
+      <header class="list-heading">
+        <h2 id="work-title" tabindex="-1">仕事一覧</h2>
+        <p><span class="result-count" id="result-count" aria-live="polite">20件</span>を表示</p>
+      </header>
+      <div class="column-head" aria-hidden="true"><span>状態</span><span>事業</span><span>仕事</span><span>次の行動</span><span></span></div>
 
-    <div id="businesses">
-      <section class="business-section" id="business-1" data-business-section="1">
-        <header class="business-heading"><span class="business-number">1</span><div><h2>アクセサリー物販コンサル</h2><p>受講者が迷わず実践できる教材と支援を整える。</p></div><span class="business-count">2件</span></header>
-        <div class="cards">
-          <article class="card" data-business="1" data-state="confirm" data-search="アクセ 講義 Canva 画像配置 表示 編集リンク PDF">
-            <div class="card-top"><h3>アクセ講義のCanva版を仕上げる</h3><span class="badge">保留・要確認</span></div>
-            <p class="purpose">完成しているアクセ講義を、Canvaで編集・共有できる形にする。</p>
-            <div class="progress"><div><small>いま</small><p>講義内容・PDF・講師メモは完成しています。</p></div><div><small>次にやる</small><p>Canvaへの画像配置・表示・編集リンクを確認します。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/19 本人依頼・制作記録</span></div>
-          </article>
-          <article class="card" data-business="1" data-state="confirm" data-search="CS 育成 問い合わせ 返信 引き継ぎ 最新状況">
-            <div class="card-top"><h3>CS育成の最新状況を確認する</h3><span class="badge">保留・要確認</span></div>
-            <p class="purpose">アクセサリー事業のCS育成と担当候補の選定を進める。</p>
-            <div class="progress"><div><small>いま</small><p>9月18日にCS育成とメンバー選定の依頼があり、以後の進展は未確認です。</p></div><div><small>次にやる</small><p>現在の担当・進捗・残課題を確認します。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：9/18 本人依頼</span></div>
-          </article>
-        </div>
+      <div class="work-list" id="work-list">
+        <details class="work-item" id="consulting-canva-course" data-business="1" data-state="confirm" data-search="アクセ 講義 Canva 画像配置 表示 編集リンク PDF">
+          <summary aria-expanded="false"><span class="state-label">要確認</span><span class="row-business">01 物販コンサル</span><h3 class="row-title">アクセ講義のCanva版を仕上げる</h3><p class="next-action"><strong>次</strong>Canvaへの画像配置・表示・編集リンクを確認します。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>完成しているアクセ講義を、Canvaで編集・共有できる形にする。</p></div><div class="detail-block"><small>現在</small><p>講義内容・PDF・講師メモは完成しています。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/19 本人依頼・制作記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="consulting-cs-training" data-business="1" data-state="confirm" data-search="CS 育成 メンバー 選定 最新状況">
+          <summary aria-expanded="false"><span class="state-label">要確認</span><span class="row-business">01 物販コンサル</span><h3 class="row-title">CS育成の最新状況を確認する</h3><p class="next-action"><strong>次</strong>現在の担当・進捗・残課題を確認します。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>アクセサリー事業のCS育成と担当候補の選定を進める。</p></div><div class="detail-block"><small>現在</small><p>9月18日にCS育成とメンバー選定の依頼があり、以後の進展は未確認です。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：9/18 本人依頼</span></div></div>
+        </details>
+
+        <details class="work-item" id="retail-inventory-reconciliation" data-business="2" data-state="focus" data-search="在庫 販売 照合 商品 URL 販売先 日付">
+          <summary aria-expanded="false"><span class="state-label">今進める</span><span class="row-business">02 アクセサリー物販</span><h3 class="row-title">在庫と販売実績を照合する</h3><p class="next-action"><strong>次</strong>商品・販売先・日付が未確定の行を照合します。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>売れた商品と手元の在庫を一致させ、精算の土台をつくる。</p></div><div class="detail-block"><small>現在</small><p>一部の商品と販売URLは反映済みで、未同定の行が残っています。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：作業記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="retail-partner-settlement" data-business="2" data-state="focus" data-search="共同 精算 売上 費用 未照合 出金 契約条件">
+          <summary aria-expanded="false"><span class="state-label">今進める</span><span class="row-business">02 アクセサリー物販</span><h3 class="row-title">共同精算を確定する</h3><p class="next-action"><strong>次</strong>取引の対応を確定し、指定の表へ反映します。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>売上と費用を同じ基準で合わせ、共同事業の数字を締める。</p></div><div class="detail-block"><small>現在</small><p>一部は照合済みです。未照合商品・出金の充当・契約条件が残り、最終額は未確定です。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：精算設計</span></div></div>
+        </details>
+
+        <details class="work-item" id="retail-sourcing-research" data-business="2" data-state="recurring" data-search="仕入れ 候補 相場 利益 画像判定 明細">
+          <summary aria-expanded="false"><span class="state-label">繰り返す</span><span class="row-business">02 アクセサリー物販</span><h3 class="row-title">仕入れ候補を調べる</h3><p class="next-action"><strong>次</strong>候補の原データを確認し、仕入れ判断へ回します。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>売れた相場から逆算し、利益が残る候補だけを見る。</p></div><div class="detail-block"><small>現在</small><p>候補収集・公開に成功した仕組みがある一方、一部は途中エラー。画像判定と明細確認も残っています。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：運用記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="retail-stream-research" data-business="2" data-state="asset" data-search="連続 リサーチ 仕入れ 検索 停止 再開">
+          <summary aria-expanded="false"><span class="state-label">完成・保管</span><span class="row-business">02 アクセサリー物販</span><h3 class="row-title">連続リサーチの仕組みを保管する</h3><p class="next-action"><strong>次</strong>本人から再開指示が出たときだけ動かします。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>必要になったとき、仕入れ候補の連続検索を再開できるようにする。</p></div><div class="detail-block"><small>現在</small><p>修復後の実検索まで確認済み。本人の「今はやめて」の指示で停止しています。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/23 稼働記録・本人指示</span></div></div>
+        </details>
+
+        <details class="work-item" id="retail-90day-invoice-tool" data-business="2" data-state="asset" data-search="90日 買取 請求書 ツール 完成">
+          <summary aria-expanded="false"><span class="state-label">完成・保管</span><span class="row-business">02 アクセサリー物販</span><h3 class="row-title">90日買取請求書ツールを使う</h3><p class="next-action"><strong>次</strong>買取請求書が必要なときに、この完成ツールを使います。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>買取分の請求書を、決めた形式で作れるようにする。</p></div><div class="detail-block"><small>現在</small><p>90日買取請求書ツールは完成しています。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/3 完成記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="retail-new-product-shirt" data-business="2" data-state="confirm" data-search="Amazon Tシャツ デザイン 入稿 サイズ 背景透過 印刷品質 新商品">
+          <summary aria-expanded="false"><span class="state-label">要確認</span><span class="row-business">02 関連：新商品制作</span><h3 class="row-title">Amazon向けTシャツ案の入稿仕様を確認する</h3><p class="next-action"><strong>次</strong>入稿サイズ・背景透過・印刷品質を確認します。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>作成済みのデザイン案が、入稿仕様に合うか確認する。</p></div><div class="detail-block"><small>現在</small><p>Canvaでデザイン案を作成済みです。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/27 本人依頼・制作記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="education-ai-bonuses" data-business="3" data-state="asset" data-search="AI 特典 5つ 新版 完成 公開 講義 案内">
+          <summary aria-expanded="false"><span class="state-label">完成・保管</span><span class="row-business">03 SNS講師・教育</span><h3 class="row-title">AI特典5つの新版を使う</h3><p class="next-action"><strong>次</strong>必要な講義・案内で完成版を使います。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>必要な講義・案内で、完成した5特典をすぐ使えるようにする。</p></div><div class="detail-block"><small>現在</small><p>新版の制作・公開・公開後確認が完了しています。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：22:28 公開・公開後検証記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="education-talk-reel-course" data-business="3" data-state="asset" data-search="トークリール 講義 32枚 資料 完成">
+          <summary aria-expanded="false"><span class="state-label">完成・保管</span><span class="row-business">03 SNS講師・教育</span><h3 class="row-title">トークリール講義を使う</h3><p class="next-action"><strong>次</strong>トークリール講義で、この完成版を使います。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>話す内容と撮影の流れを、講義や制作支援へすぐ使う。</p></div><div class="detail-block"><small>現在</small><p>最終32枚の講義資料が完成しています。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/20 完成記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="own-sns-instagram" data-business="4" data-state="focus" data-search="Instagram インスタ 投稿 アフレコ リール 撮影 編集">
+          <summary aria-expanded="false"><span class="state-label">今進める</span><span class="row-business">04 本人SNS</span><h3 class="row-title">Instagram投稿を立て直す</h3><p class="next-action"><strong>次</strong>家で撮れるアフレコリールを増やし、台本から撮影・編集・投稿へ進めます。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>撮影と編集の負担を下げ、本人発信を続けやすくする。</p></div><div class="detail-block"><small>現在</small><p>撮影・編集に時間がかかり、投稿が遅れています。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/29 本人会話</span></div></div>
+        </details>
+
+        <details class="work-item" id="own-sns-threads-x" data-business="4" data-state="recurring" data-search="Threads X 発信 投稿 自動 通信 ブラウザ">
+          <summary aria-expanded="false"><span class="state-label">繰り返す</span><span class="row-business">04 本人SNS</span><h3 class="row-title">Threads・Xの発信を回す</h3><p class="next-action"><strong>次</strong>投稿を続けながら、不安定な枠の送信結果を確認します。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>短い発信を切らさず、考えや実例が伝わる状態を保つ。</p></div><div class="detail-block"><small>現在</small><p>発信は継続中ですが、一部の自動投稿が通信・ブラウザの失敗で不安定です。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：稼働記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="own-sns-reel-daily" data-business="4" data-state="recurring" data-search="リール 候補 日次 調査 解析 公開 連絡">
+          <summary aria-expanded="false"><span class="state-label">繰り返す</span><span class="row-business">04 本人SNS</span><h3 class="row-title">リール候補を日次で調べる</h3><p class="next-action"><strong>次</strong>日次の調査を続け、次の投稿候補へ反映します。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>投稿テーマを勘に頼らず、実際の反応から選べるようにする。</p></div><div class="detail-block"><small>現在</small><p>10月30日の解析・候補公開・連絡まで完了しています。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：運用記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="own-sns-close-video-lp" data-business="4" data-state="confirm" data-search="密着 動画 LP 配信 HTML 公開 判断">
+          <summary aria-expanded="false"><span class="state-label">要確認</span><span class="row-business">04 本人SNS</span><h3 class="row-title">密着動画LPの次の公開判断をする</h3><p class="next-action"><strong>次</strong>配信先と動画素材を、この案件だけで確認します。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>密着動画のページ素材を、確認済みの配信先へ置けるようにする。</p></div><div class="detail-block"><small>現在</small><p>配信ページ用のHTMLは準備済み。配信先は未確定で、動画は後付けです。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/29 制作記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="b-team-monthly-improvement" data-business="5" data-state="recurring" data-search="Bチーム 月次 改善 台本 投稿 撮影 編集 相談 添削">
+          <summary aria-expanded="false"><span class="state-label">繰り返す</span><span class="row-business">05 Bチーム</span><h3 class="row-title">チームの月次改善を回す</h3><p class="next-action"><strong>次</strong>改善テーマを整理し、添削・相談対応を行い、次回に振り返ります。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>売上だけでなく、止まりやすい工程も見て次月の動きを直す。</p></div><div class="detail-block"><small>現在</small><p>10月29日に台本・投稿・撮影・編集・相談を振り返り、各担当が次の具体行動を決めました。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/29 会議記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="b-team-media-assets" data-business="5" data-state="asset" data-search="Bチーム 素材 整理 再利用 撮影 制作">
+          <summary aria-expanded="false"><span class="state-label">完成・保管</span><span class="row-business">05 Bチーム</span><h3 class="row-title">整理済みの素材を再利用する</h3><p class="next-action"><strong>次</strong>新しい制作物で必要な素材だけ選びます。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>撮影済みの素材を探す時間を減らし、制作へすぐ回す。</p></div><div class="detail-block"><small>現在</small><p>Bチームの素材整理は完了しています。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/25 完成記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="sales-team-live-funnel" data-business="6" data-state="confirm" data-search="セールス 販売 導線 企画書 解説 台本 本番 リンク 配信">
+          <summary aria-expanded="false"><span class="state-label">要確認</span><span class="row-business">06 セールスB</span><h3 class="row-title">販売導線の本番設定を確認する</h3><p class="next-action"><strong>次</strong>本番リンクと配信設定を確認します。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>できている企画と説明を、実際の案内・申込みへつなげる。</p></div><div class="detail-block"><small>現在</small><p>販売企画書と解説台本は完成しています。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/26 セールス向け制作記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="management-tax-preparation" data-business="7" data-state="focus" data-search="経費 申告 会計 分類 接続 資料 相談 継続費用 支出">
+          <summary aria-expanded="false"><span class="state-label">今進める</span><span class="row-business">07 全体管理</span><h3 class="row-title">経費と申告準備を進める</h3><p class="next-action"><strong>次</strong>必要資料と相談内容を整理し、支出見直しの結果を確認します。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>事業の支出を説明できる形にし、申告へ進める。</p></div><div class="detail-block"><small>現在</small><p>会計分類と接続は完了。申告に必要な資料・相談内容と、継続費用の確認が残っています。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/23 会計整理・残件</span></div></div>
+        </details>
+
+        <details class="work-item" id="management-business-structure" data-business="7" data-state="asset" data-search="事業 形態 判断 運営 申告 支出 管理">
+          <summary aria-expanded="false"><span class="state-label">完成・保管</span><span class="row-business">07 全体管理</span><h3 class="row-title">事業形態の判断を現在の運営に使う</h3><p class="next-action"><strong>次</strong>今は申告と支出管理を進めます。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>決めた事業形態を前提に、いま必要な管理へ集中する。</p></div><div class="detail-block"><small>現在</small><p>事業形態の判断は整理済みです。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/24 判断記録</span></div></div>
+        </details>
+
+        <details class="work-item" id="management-subsidy" data-business="7" data-state="confirm" data-search="補助金 申告 公募 条件 申請 資料">
+          <summary aria-expanded="false"><span class="state-label">要確認</span><span class="row-business">07 全体管理</span><h3 class="row-title">申告後に補助金準備を進める</h3><p class="next-action"><strong>次</strong>申告後に最新の公募と条件を確認し、申請可否を決めます。</p><span class="chevron" aria-hidden="true">⌄</span></summary>
+          <div class="detail-body"><div class="detail-block"><small>目的</small><p>使える制度があるとき、必要書類を慌てず出せるようにする。</p></div><div class="detail-block"><small>現在</small><p>8月時点の候補制度と条件を調べた資料があります。現在は申請中ではありません。</p></div><div class="evidence"><span>確認：2026-10-30</span><span>根拠：8月 調査記録</span></div></div>
+        </details>
+      </div>
+
+      <section class="empty" id="empty" aria-hidden="true">
+        <h2>条件に合う仕事がありません</h2>
+        <p>別の事業を選ぶと検索条件を解除して表示します。</p>
+        <button class="reset-button" id="empty-reset" type="button">条件を解除</button>
       </section>
-
-      <section class="business-section" id="business-2" data-business-section="2">
-        <header class="business-heading"><span class="business-number">2</span><div><h2>アクセサリー物販</h2><p>仕入れ・在庫・販売・精算を一つの流れにする。</p></div><span class="business-count">6件</span></header>
-        <div class="cards">
-          <article class="card" data-business="2" data-state="focus" data-search="在庫 販売 照合 売れた商品 個数 差分">
-            <div class="card-top"><h3>在庫と販売実績を照合する</h3><span class="badge">今進める</span></div>
-            <p class="purpose">売れた商品と手元の在庫を一致させ、精算の土台をつくる。</p>
-            <div class="progress"><div><small>いま</small><p>一部の商品と販売URLは反映済みで、未同定の行が残っています。</p></div><div><small>次にやる</small><p>商品・販売先・日付が未確定の行を照合します。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：作業記録</span></div>
-          </article>
-          <article class="card" data-business="2" data-state="focus" data-search="共同 精算 利益 負担 配分 在庫照合">
-            <div class="card-top"><h3>共同精算を確定する</h3><span class="badge">今進める</span></div>
-            <p class="purpose">売上と費用を同じ基準で合わせ、共同事業の数字を締める。</p>
-            <div class="progress"><div><small>いま</small><p>一部は照合済みです。未照合商品・出金の充当・契約条件が残り、最終額は未確定です。</p></div><div><small>次にやる</small><p>取引の対応を確定し、指定の表へ反映します。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：精算設計</span></div>
-          </article>
-          <article class="card" data-business="2" data-state="recurring" data-search="仕入れ リサーチ 相場 入札 商品 候補">
-            <div class="card-top"><h3>仕入れ候補を調べる</h3><span class="badge">繰り返す業務</span></div>
-            <p class="purpose">売れた相場から逆算し、利益が残る候補だけを見る。</p>
-            <div class="progress"><div><small>いま</small><p>候補収集・公開に成功した仕組みがある一方、一部は途中エラー。画像判定と明細確認も残っています。</p></div><div><small>次にやる</small><p>候補の原データを確認し、仕入れ判断へ回します。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：運用記録</span></div>
-          </article>
-          <article class="card" data-business="2" data-state="asset" data-search="連続 リサーチ 仕入れ 自動化 停止 再開 条件">
-            <div class="card-top"><h3>連続リサーチの仕組みを保管する</h3><span class="badge">使える完成品</span></div>
-            <p class="purpose">必要になったとき、仕入れ候補の連続検索を再開できるようにする。</p>
-            <div class="progress"><div><small>いま</small><p>修復後の実検索まで確認済み。本人の「今はやめて」の指示で停止しています。</p></div><div><small>次にやる</small><p>本人から再開指示が出たときだけ動かします。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/23 稼働記録・本人指示</span></div>
-          </article>
-          <article class="card" data-business="2" data-state="asset" data-search="90日 買取 請求書 完成 ツール">
-            <div class="card-top"><h3>90日買取請求書ツールを使う</h3><span class="badge">使える完成品</span></div>
-            <p class="purpose">買取分の請求書を、決めた形式で作れるようにする。</p>
-            <div class="progress"><div><small>いま</small><p>90日買取請求書ツールは完成しています。</p></div><div><small>次にやる</small><p>買取請求書が必要なときに、この完成ツールを使います。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/3 完成記録</span></div>
-          </article>
-          <article class="card" data-business="2" data-state="confirm" data-search="Amazon Tシャツ デザイン 案 入稿 サイズ 透過 印刷品質 新商品">
-            <div class="card-top"><h3>Amazon向けTシャツ案の入稿仕様を確認する</h3><span class="badge">保留・要確認</span></div>
-            <p class="purpose"><strong>関連：新商品制作</strong><br>作成済みのデザイン案が、入稿仕様に合うか確認する。</p>
-            <div class="progress"><div><small>いま</small><p>Canvaでデザイン案を作成済みです。</p></div><div><small>次にやる</small><p>入稿サイズ・背景透過・印刷品質を確認します。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/27 本人依頼・制作記録</span></div>
-          </article>
-        </div>
-      </section>
-
-      <section class="business-section" id="business-3" data-business-section="3">
-        <header class="business-heading"><span class="business-number">3</span><div><h2>SNS講師・教育</h2><p>教える内容を、配れる形・実践できる形まで仕上げる。</p></div><span class="business-count">2件</span></header>
-        <div class="cards">
-          <article class="card" data-business="3" data-state="focus" data-search="AI 特典 新版 5つ PDF 配布 受け取り 導線">
-            <div class="card-top"><h3>AI特典5つの新版を仕上げる</h3><span class="badge">今進める</span></div>
-            <p class="purpose">品質指摘を反映し、内容と表示の両方を安心して使える状態にする。</p>
-            <div class="progress"><div><small>いま</small><p>全面改稿後の内容確認は完了。図解と表示の修正が残っています。</p></div><div><small>次にやる</small><p>図解・表示を直し、再検収してから新版へ反映します。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：制作状況</span></div>
-          </article>
-          <article class="card" data-business="3" data-state="asset" data-search="トークリール 講義 台本 教材 撮影 使える">
-            <div class="card-top"><h3>トークリール講義を使う</h3><span class="badge">使える完成品</span></div>
-            <p class="purpose">話す内容と撮影の流れを、講義や制作支援へすぐ使う。</p>
-            <div class="progress"><div><small>いま</small><p>最終32枚の講義資料が完成しています。</p></div><div><small>次にやる</small><p>トークリール講義で、この完成版を使います。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/20 完成記録</span></div>
-          </article>
-        </div>
-      </section>
-
-      <section class="business-section" id="business-4" data-business-section="4">
-        <header class="business-heading"><span class="business-number">4</span><div><h2>本人SNS</h2><p>日々の発信を戻し、本人への相談につながる入口をつくる。</p></div><span class="business-count">4件</span></header>
-        <div class="cards">
-          <article class="card" data-business="4" data-state="focus" data-search="Instagram インスタ 投稿 再開 テーマ 制作 発信 立て直し">
-            <div class="card-top"><h3>Instagram投稿を立て直す</h3><span class="badge">今進める</span></div>
-            <p class="purpose">撮影と編集の負担を下げ、本人発信を続けやすくする。</p>
-            <div class="progress"><div><small>いま</small><p>撮影・編集に時間がかかり、投稿が遅れています。</p></div><div><small>次にやる</small><p>家で撮れるアフレコリールを増やし、台本から撮影・編集・投稿へ進めます。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/29 本人会話</span></div>
-          </article>
-          <article class="card" data-business="4" data-state="recurring" data-search="Threads X 投稿 毎日 発信 下書き 配信">
-            <div class="card-top"><h3>Threads・Xの発信を回す</h3><span class="badge">繰り返す業務</span></div>
-            <p class="purpose">短い発信を切らさず、考えや実例が伝わる状態を保つ。</p>
-            <div class="progress"><div><small>いま</small><p>発信は継続中ですが、一部の自動投稿が通信・ブラウザの失敗で不安定です。</p></div><div><small>次にやる</small><p>投稿を続けながら、不安定な枠の送信結果を確認します。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：稼働記録</span></div>
-          </article>
-          <article class="card" data-business="4" data-state="recurring" data-search="リール 調査 ネタ 台本 候補 日次 毎日">
-            <div class="card-top"><h3>リール候補を日次で調べる</h3><span class="badge">繰り返す業務</span></div>
-            <p class="purpose">投稿テーマを勘に頼らず、実際の反応から選べるようにする。</p>
-            <div class="progress"><div><small>いま</small><p>10月30日の解析・候補公開・連絡まで完了しています。</p></div><div><small>次にやる</small><p>日次の調査を続け、次の投稿候補へ反映します。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：運用記録</span></div>
-          </article>
-          <article class="card" data-business="4" data-state="confirm" data-search="密着 動画 LP 申込み 導線 別案件 公開 確認">
-            <div class="card-top"><h3>密着動画LPの次の公開判断をする</h3><span class="badge">保留・要確認</span></div>
-            <p class="purpose">密着動画のページ素材を、確認済みの配信先へ置けるようにする。</p>
-            <div class="progress"><div><small>いま</small><p>配信ページ用のHTMLは準備済み。配信先は未確定で、動画は後付けです。</p></div><div><small>次にやる</small><p>配信先と動画素材を、この案件だけで確認します。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/29 制作記録</span></div>
-          </article>
-        </div>
-      </section>
-
-      <section class="business-section" id="business-5" data-business-section="5">
-        <header class="business-heading"><span class="business-number">5</span><div><h2>Bチーム</h2><p>月次の数字と現場の声から、運営を少しずつ改善する。</p></div><span class="business-count">2件</span></header>
-        <div class="cards">
-          <article class="card" data-business="5" data-state="recurring" data-search="チーム 月次 改善 数字 会議 現場 次月 運営">
-            <div class="card-top"><h3>チームの月次改善を回す</h3><span class="badge">繰り返す業務</span></div>
-            <p class="purpose">売上だけでなく、止まりやすい工程も見て次月の動きを直す。</p>
-            <div class="progress"><div><small>いま</small><p>10月29日に台本・投稿・撮影・編集・相談を振り返り、各担当が次の具体行動を決めました。</p></div><div><small>次にやる</small><p>改善テーマを整理し、添削・相談対応を行い、次回に振り返ります。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/29 会議記録</span></div>
-          </article>
-          <article class="card" data-business="5" data-state="asset" data-search="動画 写真 素材 整理 チーム 制作 再利用">
-            <div class="card-top"><h3>整理済みの素材を再利用する</h3><span class="badge">使える完成品</span></div>
-            <p class="purpose">撮影済みの素材を探す時間を減らし、制作へすぐ回す。</p>
-            <div class="progress"><div><small>いま</small><p>Bチームの素材整理は完了しています。</p></div><div><small>次にやる</small><p>新しい制作物で必要な素材だけ選びます。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/25 完成記録</span></div>
-          </article>
-        </div>
-      </section>
-
-      <section class="business-section" id="business-6" data-business-section="6">
-        <header class="business-heading"><span class="business-number">6</span><div><h2>セールスBチーム</h2><p>販売に必要な説明と導線を、本番で使える状態にする。</p></div><span class="business-count">1件</span></header>
-        <div class="cards">
-          <article class="card" data-business="6" data-state="confirm" data-search="販売 導線 企画書 台本 本番 リンク 配信 設定 セールス">
-            <div class="card-top"><h3>販売導線の本番設定を確認する</h3><span class="badge">保留・要確認</span></div>
-            <p class="purpose">できている企画と説明を、実際の案内・申込みへつなげる。</p>
-            <div class="progress"><div><small>いま</small><p>販売企画書と解説台本は完成しています。</p></div><div><small>次にやる</small><p>本番リンクと配信設定を確認します。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/26 セールス向け制作記録</span></div>
-          </article>
-        </div>
-      </section>
-
-      <section class="business-section" id="business-7" data-business-section="7">
-        <header class="business-heading"><span class="business-number">7</span><div><h2>全体管理</h2><p>経費・申告と、事業を続けるための判断を支える。</p></div><span class="business-count">3件</span></header>
-        <div class="cards">
-          <article class="card" data-business="7" data-state="focus" data-search="経費 支出 申告 会計 分類 確定申告 証憑">
-            <div class="card-top"><h3>経費と申告準備を進める</h3><span class="badge">今進める</span></div>
-            <p class="purpose">事業の支出を説明できる形にし、申告へ進める。</p>
-            <div class="progress"><div><small>いま</small><p>会計分類と接続は完了。申告に必要な資料・相談内容と、継続費用の確認が残っています。</p></div><div><small>次にやる</small><p>必要資料と相談内容を整理し、支出見直しの結果を確認します。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/23 会計整理・残件</span></div>
-          </article>
-          <article class="card" data-business="7" data-state="asset" data-search="事業 体制 法人 年内 見送り 判断">
-            <div class="card-top"><h3>事業形態の判断を現在の運営に使う</h3><span class="badge">使える完成品</span></div>
-            <p class="purpose">決めた事業形態を前提に、いま必要な管理へ集中する。</p>
-            <div class="progress"><div><small>いま</small><p>事業形態の判断は整理済みです。</p></div><div><small>次にやる</small><p>今は申告と支出管理を進めます。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：10/24 判断記録</span></div>
-          </article>
-          <article class="card" data-business="7" data-state="confirm" data-search="補助金 申請 申告 決算 書類 事業計画">
-            <div class="card-top"><h3>申告後に補助金準備を進める</h3><span class="badge">保留・要確認</span></div>
-            <p class="purpose">使える制度があるとき、必要書類を慌てず出せるようにする。</p>
-            <div class="progress"><div><small>いま</small><p>8月時点の候補制度と条件を調べた資料があります。現在は申請中ではありません。</p></div><div><small>次にやる</small><p>申告後に最新の公募と条件を確認し、申請可否を決めます。</p></div></div>
-            <div class="evidence"><span>確認：2026-10-30</span><span>根拠：8月 調査記録</span></div>
-          </article>
-        </div>
-      </section>
-    </div>
-
-    <section class="empty" id="empty" aria-hidden="true">
-      <h2>条件に合う仕事がありません</h2>
-      <p>検索語や絞り込みを変えると、仕事が表示されます。</p>
-      <button class="clear" id="empty-clear" type="button">条件を解除</button>
     </section>
   </main>
 
-  <footer><div class="wrap">このページは、2026年10月30日時点で確認できた仕事を整理したものです。状態分けと一部の事業配置には、本人の最終決定前の整理案を含みます。</div></footer>
+  <footer><div class="shell">2026年10月30日時点。状態分けと一部の事業配置には整理案を含みます。</div></footer>
 
   <script>
     (() => {
       const search = document.querySelector('#search');
-      const business = document.querySelector('#business-filter');
-      const stateButtons = [...document.querySelectorAll('[data-filter-state]')];
-      const anchorLinks = [...document.querySelectorAll('.anchor-nav a[href^="#business-"]')];
-      const cards = [...document.querySelectorAll('.card')];
-      const sections = [...document.querySelectorAll('[data-business-section]')];
-      const result = document.querySelector('#result-count');
+      const resetButtons = [document.querySelector('#reset'), document.querySelector('#empty-reset')];
+      const businessButtons = [...document.querySelectorAll('[data-business-filter]')];
+      const businessSelect = document.querySelector('#business-select');
+      const stateButtons = [...document.querySelectorAll('[data-state-filter]')];
+      const items = [...document.querySelectorAll('.work-item')];
+      const resultCount = document.querySelector('#result-count');
       const empty = document.querySelector('#empty');
+      const overview = document.querySelector('#overview');
+      let business = 'all';
       let state = 'all';
+      let visibleCount = items.length;
+      let printSnapshot = null;
 
       const normalize = value => value.toLocaleLowerCase('ja').replace(/\s+/g, ' ').trim();
 
-      function applyFilters() {
-        const query = normalize(search.value);
-        let visible = 0;
-
-        cards.forEach(card => {
-          const text = normalize(`${card.textContent} ${card.dataset.search || ''}`);
-          const matchesSearch = !query || text.includes(query);
-          const matchesBusiness = business.value === 'all' || card.dataset.business === business.value;
-          const matchesState = state === 'all' || card.dataset.state === state;
-          const show = matchesSearch && matchesBusiness && matchesState;
-          card.hidden = !show;
-          if (show) visible += 1;
-        });
-
-        sections.forEach(section => {
-          const count = section.querySelectorAll('.card:not([hidden])').length;
-          section.hidden = count === 0;
-          section.querySelector('.business-count').textContent = `${count}件`;
-        });
-
-        result.textContent = `${visible}件を表示`;
-        empty.setAttribute('aria-hidden', visible === 0 ? 'false' : 'true');
+      function syncControls() {
+        businessButtons.forEach(button => button.setAttribute('aria-pressed', button.dataset.businessFilter === business ? 'true' : 'false'));
+        businessSelect.value = business;
+        stateButtons.forEach(button => button.setAttribute('aria-pressed', button.dataset.stateFilter === state ? 'true' : 'false'));
       }
 
-      function clearFilters() {
+      function applyFilters() {
+        const query = normalize(search.value);
+        visibleCount = 0;
+        items.forEach(item => {
+          const matchesSearch = !query || normalize(`${item.textContent} ${item.dataset.search || ''}`).includes(query);
+          const matchesBusiness = business === 'all' || item.dataset.business === business;
+          const matchesState = state === 'all' || item.dataset.state === state;
+          const show = matchesSearch && matchesBusiness && matchesState;
+          item.hidden = !show;
+          if (!show) item.open = false;
+          if (show) visibleCount += 1;
+        });
+        resultCount.textContent = `${visibleCount}件`;
+        empty.setAttribute('aria-hidden', visibleCount === 0 ? 'false' : 'true');
+        syncControls();
+      }
+
+      function resetAll() {
         search.value = '';
-        business.value = 'all';
+        business = 'all';
         state = 'all';
-        stateButtons.forEach(button => button.setAttribute('aria-pressed', button.dataset.filterState === 'all' ? 'true' : 'false'));
+        items.forEach(item => { item.open = false; });
         applyFilters();
         search.focus({preventScroll: true});
       }
 
-      search.addEventListener('input', applyFilters);
-      business.addEventListener('change', applyFilters);
-      stateButtons.forEach(button => button.addEventListener('click', () => {
-        state = button.dataset.filterState;
-        stateButtons.forEach(item => item.setAttribute('aria-pressed', item === button ? 'true' : 'false'));
+      function selectBusiness(value) {
+        if (visibleCount === 0) {
+          search.value = '';
+          state = 'all';
+        }
+        business = value;
         applyFilters();
-      }));
-      document.querySelector('#clear').addEventListener('click', clearFilters);
-      document.querySelector('#empty-clear').addEventListener('click', clearFilters);
-      anchorLinks.forEach(link => link.addEventListener('click', event => {
-        event.preventDefault();
-        const targetId = link.getAttribute('href').slice(1);
-        const targetBusiness = targetId.replace('business-', '');
-        const targetSection = document.getElementById(targetId);
-        const targetHeading = targetSection.querySelector('h2');
+        document.querySelector('#work-title').focus({preventScroll: true});
+      }
 
-        search.value = '';
-        business.value = targetBusiness;
-        state = 'all';
-        stateButtons.forEach(button => button.setAttribute('aria-pressed', button.dataset.filterState === 'all' ? 'true' : 'false'));
+      search.addEventListener('input', applyFilters);
+      resetButtons.forEach(button => button.addEventListener('click', resetAll));
+      businessButtons.forEach(button => button.addEventListener('click', () => selectBusiness(button.dataset.businessFilter)));
+      businessSelect.addEventListener('change', () => selectBusiness(businessSelect.value));
+      stateButtons.forEach(button => button.addEventListener('click', () => {
+        state = button.dataset.stateFilter;
         applyFilters();
-        history.pushState(null, '', `#${targetId}`);
-        targetHeading.setAttribute('tabindex', '-1');
-        targetHeading.focus({preventScroll: true});
-        targetSection.scrollIntoView({block: 'start'});
       }));
+      items.forEach(item => {
+        const summary = item.querySelector('summary');
+        summary.addEventListener('keydown', event => {
+          if (event.key !== 'Enter') return;
+          event.preventDefault();
+          item.open = !item.open;
+        });
+        item.addEventListener('toggle', () => {
+          summary.setAttribute('aria-expanded', item.open ? 'true' : 'false');
+        });
+      });
+      overview.addEventListener('toggle', () => {
+        overview.querySelector('summary').setAttribute('aria-expanded', overview.open ? 'true' : 'false');
+      });
+      window.addEventListener('beforeprint', () => {
+        if (printSnapshot) return;
+        printSnapshot = {
+          openIds: new Set(items.filter(item => item.open).map(item => item.id)),
+          activeElement: document.activeElement,
+          scrollX: window.scrollX,
+          scrollY: window.scrollY
+        };
+        items.forEach(item => {
+          item.hidden = false;
+          item.open = true;
+          item.querySelector('summary').setAttribute('aria-expanded', 'true');
+        });
+        resultCount.textContent = `${items.length}件`;
+        empty.setAttribute('aria-hidden', 'true');
+      });
+      window.addEventListener('afterprint', () => {
+        if (!printSnapshot) return;
+        const snapshot = printSnapshot;
+        printSnapshot = null;
+        applyFilters();
+        items.forEach(item => {
+          item.open = snapshot.openIds.has(item.id);
+          item.querySelector('summary').setAttribute('aria-expanded', item.open ? 'true' : 'false');
+        });
+        if (snapshot.activeElement instanceof HTMLElement) snapshot.activeElement.focus({preventScroll: true});
+        window.scrollTo(snapshot.scrollX, snapshot.scrollY);
+      });
       applyFilters();
     })();
   </script>
